@@ -11,10 +11,14 @@ def test_find_patient_with_valid_id() -> None:
 
     data_store = SmartCareDataStore()
     service = PatientService(data_store)
-    patient = service.register_patient('J1', 'Joji')
+    patient = service.register_patient('J1', 'Alex Example')
 
     assert service.find_patient('J1') is patient
     assert service.find_patient(' J1 ') is patient
+    
+    with pytest.raises(LookupError):
+        service.find_patient(' j1 ')
+
     assert data_store.list_patients() == [patient]
 
 
@@ -27,7 +31,8 @@ def test_unknown_patient_id() -> None:
 
     with pytest.raises(LookupError):
         service.find_patient('J3')
-    
+
+    assert data_store.list_patients() == []
 
 def test_invalid_patient_id() -> None:
     
@@ -36,7 +41,7 @@ def test_invalid_patient_id() -> None:
     data_store = SmartCareDataStore()
     service = PatientService(data_store)
 
-    patient = service.register_patient('J1', 'Joji')
+    patient = service.register_patient('J1', 'Alex Example')
 
     with pytest.raises(ValueError):
         service.find_patient(' ')
@@ -48,5 +53,5 @@ def test_invalid_patient_id() -> None:
         service.find_patient(123)
 
     assert data_store.find_patient('J1') is patient
-    assert patient.name == 'Joji'
+    assert patient.name == 'Alex Example'
     assert data_store.list_patients() == [patient]

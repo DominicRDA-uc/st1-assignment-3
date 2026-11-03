@@ -36,10 +36,7 @@ class PatientService:
           LookupError when record absent for valid ID.
           ValueError when ID is blank or invalid.
          """
-        
-        if not patient_id:
-            raise ValueError('Patient ID is required')
-
+    
         patient = self.data_store.find_patient(patient_id)
         if patient is None:
             raise LookupError('Patient not found')
