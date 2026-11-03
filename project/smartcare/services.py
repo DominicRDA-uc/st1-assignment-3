@@ -68,15 +68,12 @@ class PractitionerService:
         Return the stored practitioner for a valid practitioner ID.
         Raise LookupError for absence and ValueError for a blank/invalid ID.
         """
-        
-        if not practitioner_id:
-            raise ValueError("Invalid practitioner ID")
-
         practitioner = self.data_store.find_practitioner(practitioner_id)
         if practitioner is None:
             raise LookupError("Practitioner not found")
         
         return practitioner
+
 
 class AppointmentService:
     """Coordinate booking, lookup and cancellation using the shared store."""

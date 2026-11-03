@@ -10,10 +10,14 @@ def test_find_practitioner_with_valid_id() -> None:
 
     data_store = SmartCareDataStore()
     service = PractitionerService(data_store)
-    practitioner = service.register_practitioner('Prac1', 'Joji', 'General')
+    practitioner = service.register_practitioner('Prac1', 'Taylor Example', 'General')
 
     assert service.find_practitioner('Prac1') is practitioner
     assert service.find_practitioner(' Prac1 ') is practitioner
+
+    with pytest.raises(LookupError):
+        service.find_practitioner('prac1')
+
     assert data_store.list_practitioners() == [practitioner]
 
 
@@ -26,13 +30,15 @@ def test_unknown_practitioner_id() -> None:
     with pytest.raises(LookupError):
         service.find_practitioner('Prac3')
 
+    assert data_store.list_practitioners() == []
+
 
 def test_invalid_practitioner_id() -> None:
     """Verify an invalid ID is rejected."""
 
     data_store = SmartCareDataStore()
     service = PractitionerService(data_store)
-    practitioner = service.register_practitioner('Prac1', 'Joji', 'General')
+    practitioner = service.register_practitioner('Prac1', 'Taylor Example', 'General')
 
     with pytest.raises(ValueError):
         service.find_practitioner(' ')
@@ -44,5 +50,5 @@ def test_invalid_practitioner_id() -> None:
         service.find_practitioner(123)
 
     assert data_store.find_practitioner('Prac1') is practitioner
-    assert practitioner.name == 'Joji'
+    assert practitioner.name == 'Taylor Example'
     assert data_store.list_practitioners() == [practitioner]
