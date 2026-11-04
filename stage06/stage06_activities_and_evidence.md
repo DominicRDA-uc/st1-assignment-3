@@ -99,80 +99,97 @@ Repeat this block per PR. Record actual events, not planned approvals.
 - PR link and title: https://github.com/DominicRDA-uc/st1-assignment-3/pull/5 — Enhancement/Feature: Implemented Code for Patient Search by ID
 - Linked issue and requirement: https://github.com/DominicRDA-uc/st1-assignment-3/issues/2 — FR-02 Patient Search
 - Feature branch: stage6/feature/issue-2_patient_search
-- Changed behaviour: PatientService.find_patient returns the stored patient for a valid ID, raises LookupError when no patient is stored for that ID, and raises ValueError for a blank or invalid ID, does not add a patient. Tests are in project/tests/services_test/patient_service_test.py.
-
-- Meaningful commits: https://github.com/DominicRDA-uc/st1-assignment-3/commit/6733d4678cb97c6043e66cceafc543e87a58f753
+- Changed behaviour: PatientService.find_patient returns the stored patient for a valid ID, raises LookupError when no patient is stored for that ID, and raises ValueError for a blank or invalid ID, does not add a patient. Tests were first in project/tests/services_test/patient_service_test.py and were moved to project/tests/test_services/patient_service_test.py after review.
+- Meaningful commits: https://github.com/DominicRDA-uc/st1-assignment-3/commit/6733d4678cb97c6043e66cceafc543e87a58f753 (feature), https://github.com/DominicRDA-uc/st1-assignment-3/commit/fd2c894188166b5b916403e971f6d016112dc8c1 (review fixes)
 - Test command, directory and observed result: python -m pytest, directory project/ on commit 6733d4678cb97c6043e66cceafc543e87a58f753, 11 passed (Python 3.13.12, pytest 8.3.5).
-- Another-member reviewer: [response]
-- Human observations recorded before Copilot: [link and time]
-- Requirement, responsibilities, test assertions and unrelated-scope checks: [response]
-- Key feedback: [response]
-- Author response/change and verification: [response]
-- Reviewer recheck and approval: [link]
-- Merge outcome and SHA: [response]
-- Significant Copilot assistance: [summary or none]
-- Linked issue closure: [response]
-- Each member updated main: [member and confirmation]
-- Integrated verification after merge: [command, directory, result and code SHA]
+- Another-member reviewer: Dominic (DominicRDA-uc)
+- Human observations recorded before Copilot: Review submitted on https://github.com/DominicRDA-uc/st1-assignment-3/pull/5 on 3 Nov 2026 (evening) as "Request changes", before the Copilot review was run (see PR timestamps). Reviewer re-ran python -m pytest in project/ on 6733d46 (Python 3.14.3): 11 passed.
+- Requirement, responsibilities, test assertions and unrelated-scope checks: Checked against FR-02 / AC-02.1 and AC-02.2 and the Part D lookup contract. Lookup stays in the service and uses the store's validation; no new storage. Assertions check object identity (is), LookupError, ValueError and unchanged store. Diff only touches find_patient and its tests.
+- Key feedback: Tests should be in tests/test_services.py (handout Part D); add a case-sensitivity test; replace the non-synthetic test name; remove the service-level 'if not patient_id' check because the store's required_text already validates; update the PR description (Part G).
+- Author response/change and verification: Junaid removed the duplicate check, used synthetic names, added a case-sensitivity assertion (' j1 ' raises LookupError) and an empty-store assertion after an unknown lookup. Tests were moved to a tests/test_services/ folder rather than a single tests/test_services.py file (carried forward, see section M). Reviewer re-ran python -m pytest in project/ on fd2c894 (Python 3.14.3): 11 passed.
+- Reviewer recheck and approval: Approved by DominicRDA-uc on 4 Nov 2026 after checking each comment against the fix commit https://github.com/DominicRDA-uc/st1-assignment-3/commit/fd2c894188166b5b916403e971f6d016112dc8c1
+- Merge outcome and SHA: Merged into main by DominicRDA-uc on 4 Nov 2026. Integrated main SHA recorded in section M.
+- Significant Copilot assistance: Copilot Chat (Agent mode) review run after the human review. Decisions: test-results concern Modified, type-checking concern Rejected, cancellation drift Rejected. Full record in sections H and I.
+- Linked issue closure: Closed as completed on 4 Nov 2026 after merge, with verification comment.
+- Each member updated main: Dominic (pulled main, 4 Nov 2026). Junaid, Jules, Aditti: [to confirm]
+- Integrated verification after merge: python -m pytest, directory project/, 17 passed on main SHA c5630d7c6dfb219b4d2bed07afada93fdd877bae (Python 3.14.3)
 
 - PR link and title: https://github.com/DominicRDA-uc/st1-assignment-3/pull/6 — Feature: Implemented Find practitioner by ID Lookup
 - Linked issue and requirement: https://github.com/DominicRDA-uc/st1-assignment-3/issues/3 — Practitioner search by ID
 - Feature branch: stage6/feature/issue-3_practitioner_search
-- Changed behaviour: PractitionerService.find_practitioner returns the stored practitioner for a valid ID, raises LookupError when none is stored, and raises ValueError for a blank or invalid ID, does not add a practitioner. Tests are in project/tests/services_test/practitioner_service_test.py.
-- Meaningful commits: https://github.com/DominicRDA-uc/st1-assignment-3/commit/6328f69b356e66b46f18ed19d1a255801e8d83ce
+- Changed behaviour: PractitionerService.find_practitioner returns the stored practitioner for a valid ID, raises LookupError when none is stored, and raises ValueError for a blank or invalid ID, does not add a practitioner. Tests were moved to project/tests/test_services/practitioner_service_test.py after review.
+- Meaningful commits: https://github.com/DominicRDA-uc/st1-assignment-3/commit/6328f69b356e66b46f18ed19d1a255801e8d83ce (feature), https://github.com/DominicRDA-uc/st1-assignment-3/commit/986c45a172cc0bac0c01461daa3e8a7c80b99c05 (review fixes)
 - Test command, directory and observed result: python -m pytest, directory project/ on commit 6328f69b356e66b46f18ed19d1a255801e8d83ce, 11 passed (Python 3.13.12, pytest 8.3.5).
-- Another-member reviewer: [response]
-- Human observations recorded before Copilot: [link and time]
-- Requirement, responsibilities, test assertions and unrelated-scope checks: [response]
-- Key feedback: [response]
-- Author response/change and verification: [response]
-- Reviewer recheck and approval: [link]
-- Merge outcome and SHA: [response]
-- Significant Copilot assistance: [summary or none]
-- Linked issue closure: [response]
-- Each member updated main: [member and confirmation]
-- Integrated verification after merge: [command, directory, result and code SHA]
+- Another-member reviewer: Dominic (DominicRDA-uc)
+- Human observations recorded before Copilot: Review submitted on https://github.com/DominicRDA-uc/st1-assignment-3/pull/6 on 3 Nov 2026 (evening) as "Request changes", before the Copilot review was run (see PR timestamps). Reviewer re-ran python -m pytest in project/ on 6328f69 (Python 3.14.3): 11 passed.
+- Requirement, responsibilities, test assertions and unrelated-scope checks: Checked against FR-03 (supporting lookup) and the Part D lookup contract. Same responsibility and scope checks as #5.
+- Key feedback: Same as #5 (test file location, case sensitivity, synthetic name, duplicate validation), plus the missing PEP 8 blank line before class AppointmentService. Also commented on issue #3 that its 'raises a Value Error' criterion conflicts with the LookupError contract. The first review was submitted as Comment by mistake and re-submitted as Request changes.
+- Author response/change and verification: Junaid removed the duplicate check, restored the blank line, used synthetic names, added a case-sensitivity assertion ('prac1' raises LookupError) and an empty-store assertion. Tests moved to the tests/test_services/ folder. Reviewer re-ran python -m pytest in project/ on 986c45a (Python 3.14.3): 11 passed.
+- Reviewer recheck and approval: Approved by DominicRDA-uc on 4 Nov 2026 after checking each comment against the fix commit https://github.com/DominicRDA-uc/st1-assignment-3/commit/986c45a172cc0bac0c01461daa3e8a7c80b99c05
+- Merge outcome and SHA: Merged into main by DominicRDA-uc on 4 Nov 2026. Integrated main SHA recorded in section M.
+- Significant Copilot assistance: Copilot Chat (Agent mode) review. Decisions: exception-mismatch Accepted, split validation Accepted, CI-discovery Modified, cancellation drift Rejected. Full record in sections H and I.
+- Linked issue closure: Closed as completed on 4 Nov 2026 after merge, with verification comment.
+- Each member updated main: Dominic (pulled main, 4 Nov 2026). Junaid, Jules, Aditti: [to confirm]
+- Integrated verification after merge: python -m pytest, directory project/, 17 passed on main SHA c5630d7c6dfb219b4d2bed07afada93fdd877bae (Python 3.14.3)
 
 - PR link and title: https://github.com/DominicRDA-uc/st1-assignment-3/pull/7 — Feature: Appointment Cancellation feature implemented
 - Linked issue and requirement: https://github.com/DominicRDA-uc/st1-assignment-3/issues/4 — FR-06 Appointment Cancellation with FR-07 retained history
 - Feature branch: stage6/feature/issue-4_appointment_cancellation
-- Changed behaviour: AppointmentService.cancel_appointment loads the stored appointment, calls Appointment.cancel(), and returns that same object so the record stays in the store. Unknown IDs raise LookupError. An invalid transition raises ValueError and leaves the status unchanged. Tests are in project/tests/services_test/appointment_service_test.py.
-- Meaningful commits: https://github.com/DominicRDA-uc/st1-assignment-3/commit/c35a418b406fb866e5ea9c2ea72b6cf7256d72a3
+- Changed behaviour: AppointmentService.cancel_appointment loads the stored appointment, calls Appointment.cancel(), and returns that same object so the record stays in the store. Unknown IDs raise LookupError. An invalid transition raises ValueError and leaves the status unchanged. Tests were moved to project/tests/test_services/appointment_service_test.py after review.
+- Meaningful commits: https://github.com/DominicRDA-uc/st1-assignment-3/commit/c35a418b406fb866e5ea9c2ea72b6cf7256d72a3 (feature), https://github.com/DominicRDA-uc/st1-assignment-3/commit/e5a7b185b33b6634a66c963ae612c4b8a35fd878 (review fixes)
 - Test command, directory and observed result: python -m pytest, directory project/ on commit c35a418b406fb866e5ea9c2ea72b6cf7256d72a3, 11 passed (Python 3.13.12, pytest 8.3.5).
-- Another-member reviewer: [response]
-- Human observations recorded before Copilot: [link and time]
-- Requirement, responsibilities, test assertions and unrelated-scope checks: [response]
-- Key feedback: [response]
-- Author response/change and verification: [response]
-- Reviewer recheck and approval: [link]
-- Merge outcome and SHA: [response]
-- Significant Copilot assistance: [summary or none]
-- Linked issue closure: [response]
-- Each member updated main: [member and confirmation]
-- Integrated verification after merge: [command, directory, result and code SHA]
+- Another-member reviewer: Dominic (DominicRDA-uc)
+- Human observations recorded before Copilot: Review submitted on https://github.com/DominicRDA-uc/st1-assignment-3/pull/7 on 3 Nov 2026 (evening) as "Request changes", before the Copilot review was run (see PR timestamps). Reviewer re-ran python -m pytest in project/ on c35a418 (Python 3.14.3): 11 passed.
+- Requirement, responsibilities, test assertions and unrelated-scope checks: Checked against FR-06, FR-07, AC-05.1 to AC-05.3 and the Part D cancellation contract. The service delegates the transition to Appointment.cancel(), does not set state directly or delete records. Diff only touches cancel_appointment and its tests.
+- Key feedback: Tests should be in tests/test_services.py; add a COMPLETED-cannot-be-cancelled test; add a blank-ID test; assert A1 stays SCHEDULED after an unknown-ID failure; prove same-object return (the helper discarded the booked object). Praised use of the domain cancel() method and record retention (FR-07).
+- Author response/change and verification: Junaid made the helper return the booked appointment and assert cancelled is booked; added a COMPLETED fixture (A2) that raises ValueError and stays COMPLETED; added a blank-ID ValueError check; asserted A1 stays SCHEDULED and the store is unchanged after failures. The docstring point raised by Copilot (state-unchanged wording) was not changed (carried forward, see section M). Reviewer re-ran python -m pytest in project/ on e5a7b18 (Python 3.14.3): 11 passed.
+- Reviewer recheck and approval: Approved by DominicRDA-uc on 4 Nov 2026 after checking each comment against the fix commit https://github.com/DominicRDA-uc/st1-assignment-3/commit/e5a7b185b33b6634a66c963ae612c4b8a35fd878
+- Merge outcome and SHA: Merged into main by DominicRDA-uc on 4 Nov 2026. Integrated main SHA recorded in section M.
+- Significant Copilot assistance: Copilot Chat (Agent mode) review. Decisions: COMPLETED test Accepted, docstring Accepted, CANCELED wording Accepted (minor), tests-run question Modified. Full record in sections H and I.
+- Linked issue closure: Closed as completed on 4 Nov 2026 after merge, with verification comment.
+- Each member updated main: Dominic (pulled main, 4 Nov 2026). Junaid, Jules, Aditti: [to confirm]
+- Integrated verification after merge: python -m pytest, directory project/, 17 passed on main SHA c5630d7c6dfb219b4d2bed07afada93fdd877bae (Python 3.14.3)
 
 ## H Copilot collaboration record
 
 Record meaningful required use, not every trivial completion. Repeat per significant interaction.
 
-- Member and task: [response]
-- Prompt/purpose and relevant issue/diff: [response]
-- Summary of output: [response]
-- Human check against actual code, requirements and tests: [response]
-- Decision — Accept / Modify / Reject: [select]
-- Reason: [response]
-- Verification/evidence: [link and result]
+Tool and mode for all three: GitHub Copilot Chat in VS Code, Agent mode. Copilot read workspace files (README, services.py, data_store.py, domain.py, tests, this record) and ran git status / git diff; it made no edits. Prompt: the Stage 6 Part H prompt with the linked issue text and PR diff pasted in. Run 3 Nov 2026, after the human reviews were submitted. Note: the human review points were prepared with help from Claude (AI assistant) and checked by Dominic against the code and handout before posting.
+
+- Member and task: Dominic (DominicRDA-uc), review of PR #5 against issue #2
+- Prompt/purpose and relevant issue/diff: Part H review prompt + issue #2 + PR #5 diff
+- Summary of output: Lookup logic correct; flagged that no test results were given; asked about static type checking of None/123 inputs; suggested tracking cancellation separately.
+- Human check against actual code, requirements and tests: Checked requirements-dev.txt (pytest only, no type checker), PR Checks (0, no CI) and my local test run.
+- Decision — Accept / Modify / Reject: Test results: Modify. Type checking: Reject. Cancellation: Reject.
+- Reason: Tests were already run locally (11 passed), but the PR description should state them. No type checker exists and the handout requires invalid-ID tests. Cancellation is out of scope (PR #7).
+- Verification/evidence: python -m pytest in project/ on 6733d46: 11 passed (Python 3.14.3)
+
+- Member and task: Dominic, review of PR #6 against issue #3
+- Prompt/purpose and relevant issue/diff: Part H review prompt + issue #3 + PR #6 diff
+- Summary of output: Important: issue #3 says a missing practitioner raises ValueError but the code and contract use LookupError. Optional: validation split between service and store. Suggested confirming CI discovers the tests.
+- Human check against actual code, requirements and tests: Checked handout Part D (unknown ID raises LookupError) and data_store.required_text.
+- Decision — Accept / Modify / Reject: Exception mismatch: Accept. Split validation: Accept. CI discovery: Modify. Cancellation drift: Reject.
+- Reason: The issue wording is wrong, not the code (already commented on issue #3). The service guard only covers falsy values, so the store is the real validation path. There is no CI, but the local run collected the tests.
+- Verification/evidence: issue #3 comment; python -m pytest on 6328f69: 11 passed
+
+- Member and task: Dominic, review of PR #7 against issue #4
+- Prompt/purpose and relevant issue/diff: Part H review prompt + issue #4 + PR #7 diff
+- Summary of output: Important: no COMPLETED-state test. Optional: docstring no longer says state is unchanged on failure, plus spacing. Asked whether issue wording CANCELED maps to CANCELLED.
+- Human check against actual code, requirements and tests: Checked Appointment.cancel() in domain.py, the diff docstring and the test file.
+- Decision — Accept / Modify / Reject: COMPLETED test: Accept. Docstring: Accept. CANCELED wording: Accept (minor). Tests-run question: Modify.
+- Reason: COMPLETED is required by Part D and issue #4. The docstring point is valid and was not in the human review. Tests had already been run locally.
+- Verification/evidence: python -m pytest on c35a418: 11 passed; COMPLETED test added in e5a7b18
 
 ## I Human versus Copilot review comparison
 
-- Human reviewer noticed before consulting Copilot: [response]
-- Copilot noticed: [response]
-- Overlap: [response]
-- What did the human reviewer notice that Copilot did not: [response]
-- What did Copilot identify that the human reviewer initially missed: [response]
-- Unsupported or incorrect Copilot suggestion: [response or none identified with explanation]
-- Human judgement accepted, modified or rejected, and why: [response]
-- Which evidence justified merge approval: [response]
+- Human reviewer noticed before consulting Copilot: Tests not in tests/test_services.py (Part D); missing case-sensitivity tests (#5, #6); duplicate 'if not ...' validation (#5, #6); non-synthetic test name; missing PEP 8 blank line (#6); missing COMPLETED test, blank-ID test, unchanged-state assertion and same-object proof (#7); PR descriptions missing tests run and Copilot use (Part G); issue #3 ValueError/LookupError conflict (commented on issue #3 before Copilot was run on #6).
+- Copilot noticed: Lookup and cancellation logic correct on all three; test results not stated; issue #3 exception conflict; split validation; missing COMPLETED test; PR #7 docstring lost "state unchanged on failure"; issue #4 says CANCELED not CANCELLED; type checking and CI questions.
+- Overlap: issue #3 exception conflict; duplicate/split validation; missing COMPLETED test; test evidence needing to be stated.
+- What did the human reviewer notice that Copilot did not: Every handout-specific requirement: test file location, case sensitivity, blank-ID test, unchanged state after failure, same-object return not proven, synthetic data, PEP 8 blank line, Part G PR description.
+- What did Copilot identify that the human reviewer initially missed: The PR #7 docstring dropping the state-unchanged guarantee, and the CANCELED/CANCELLED wording in issue #4.
+- Unsupported or incorrect Copilot suggestion: Assumed a CI type checker exists (there is none); drifted into cancellation on #5 and #6, outside those PRs' scope; described #7 as returning the same object without noticing the tests did not prove it.
+- Human judgement accepted, modified or rejected, and why: Accepted findings that matched the handout contracts; modified the test-evidence points because tests were run locally; rejected out-of-scope and CI assumptions. See section H.
+- Which evidence justified merge approval: Fix commits fd2c894, 986c45a and e5a7b18 address the review comments; each branch passed python -m pytest locally; all three merged together pass on main (section M). Remaining differences are recorded in section M and carried forward.
 
 ## J Contributions
 
@@ -186,6 +203,15 @@ Repeat per member. Include only categories that describe actual work; write not 
 - Design and responsibility discussion: [work and evidence]
 - Debugging or integration: [work and evidence]
 - Documentation or team support: [work and evidence]
+
+- Member: Dominic (DominicRDA-uc)
+- Implementation: not applicable for Stage 6
+- Testing: Checked out and ran python -m pytest on each PR branch before review (6733d46, 6328f69, c35a418: 11 passed each) and after fixes (fd2c894, 986c45a, e5a7b18), then on integrated main after merge (section M).
+- Review: Human review of PRs #5, #6 and #7 with line comments and Request changes; recheck and approval after fixes; Copilot comparison (sections H and I).
+- Issue refinement: Comment on issue #3 correcting the ValueError/LookupError criterion.
+- Design and responsibility discussion: Review comments on keeping validation in the store and state transitions in the domain (Appointment.cancel).
+- Debugging or integration: Merged PRs #5, #6 and #7 into main and verified the integrated suite.
+- Documentation or team support: Repository owner/setup; Stage 6 sections G (review fields), H, I, J (own entry) and M.
 
 ## K Exit question
 
@@ -239,24 +265,24 @@ Trace each requirement through its issue, code, tests and pull request. Another 
 ## M Completion and handover
 
 - Starting SHA: e5bdbf1d4eb482bee09fe683c42a528603667515
-- Final Stage 6 code SHA: [response]
+- Final Stage 6 code SHA: c5630d7c6dfb219b4d2bed07afada93fdd877bae
 - Test command: python -m pytest
 - Working directory: project/
-- Observed result: On each feature commit separately, 11 passed (Python 3.13.12, pytest 8.3.5): 6733d4678cb97c6043e66cceafc543e87a58f753, 6328f69b356e66b46f18ed19d1a255801e8d83ce, c35a418b406fb866e5ea9c2ea72b6cf7256d72a3. 
-- PR and another-member reviewer: https://github.com/DominicRDA-uc/st1-assignment-3/pull/5, https://github.com/DominicRDA-uc/st1-assignment-3/pull/6, https://github.com/DominicRDA-uc/st1-assignment-3/pull/7. Another-member reviewer: [response]
-- Unresolved issue or none: Issues 2, 3 and 4 are open. Pull requests 5, 6 and 7 are open and not merged.
-- Stage 7 handover status: unresolved work
+- Observed result: On each feature commit separately, 11 passed (Python 3.13.12, pytest 8.3.5): 6733d4678cb97c6043e66cceafc543e87a58f753, 6328f69b356e66b46f18ed19d1a255801e8d83ce, c35a418b406fb866e5ea9c2ea72b6cf7256d72a3. Integrated main after all three merges: 17 passed on c5630d7c6dfb219b4d2bed07afada93fdd877bae (Python 3.14.3, pytest 8.3.5), run by Dominic.
+- PR and another-member reviewer: https://github.com/DominicRDA-uc/st1-assignment-3/pull/5, https://github.com/DominicRDA-uc/st1-assignment-3/pull/6, https://github.com/DominicRDA-uc/st1-assignment-3/pull/7. Another-member reviewer: Dominic (DominicRDA-uc)
+- Unresolved issue or none: (1) Tests are in a tests/test_services/ folder (three files), not the single project/tests/test_services.py file named in the handout; to be consolidated at the start of Stage 7, which extends test_services.py. (2) PR #7 docstring does not restate that state is unchanged on failure (Copilot finding, minor). (3) Issue #3 and #4 wording fixes requested (LookupError, CANCELLED). (4) PR #5, #6 and #7 descriptions were not updated to list tests run and Copilot use (Part G); noted in the approval reviews. (5) Other members' pull of main to be confirmed.
+- Stage 7 handover status: Stage 6 code merged and verified on main; handed to Jules for Stage 7 with items (1) to (4) above carried forward.
 - Final submitted SHA if later than tested SHA: [response and evidence-only difference]
 
 - [X] Three Stage 6 service targets completed and checked.
 - [X] Original supplied tests retained and passing.
 - [X] At least two focused issues link requirements and acceptance criteria.
-- [ ] Feature work reviewed by another member using the actual diff.
-- [ ] Human-first review and required Copilot comparison recorded.
-- [ ] Feedback resolved and approval recorded before merge.
+- [X] Feature work reviewed by another member using the actual diff.
+- [X] Human-first review and required Copilot comparison recorded.
+- [X] Feedback resolved and approval recorded before merge.
 - [ ] Everyone pulled main and integrated checks passed.
 - [ ] Required activities, quiz responses and contribution notes completed.
-- [ ] Only synthetic data included; confidential peer material kept out.
+- [X] Only synthetic data included; confidential peer material kept out.
 - [ ] Tutor can trace a requirement through issue, code, tests, PR and checkpoint.
 
 Do not write a file's own future commit SHA into that file. Record the tested code SHA first, then commit the evidence; explain the difference when submitting.
