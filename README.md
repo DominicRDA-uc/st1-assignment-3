@@ -8,9 +8,9 @@ Baseline: Stage 6 foundation, 2026 revision 2. This starter deliberately leaves 
 - Group and tutorial: Wed 2.30-4.30 Group 2
 - Member names, GitHub usernames and UG/PG cohorts: Junaid Sayani (junaidSayani1)-PG, Dominic (DominicRDA-uc)-UG, Juliann (Jules-tryingtocode)-UG, Aditti-UG.
 - Shared repository URL: https://github.com/DominicRDA-uc/st1-assignment-3
-- Latest completed stage: None. Stage 6 is in progress.
-- Verified code SHA: -
-- Test command, working directory and observed result: Command: python -m pytest.  Dir: project/. 11 test cases passed on each feature commit (PR) above (Python 3.13.12, pytest 8.3.5). Total at end of stage 6 17 Tests, all passing.
+- Latest completed stage: Stage 6 (merged and verified). Stage 7 in progress.
+- Verified code SHA: c5630d7c6dfb219b4d2bed07afada93fdd877bae
+- Test command, working directory and observed result: python -m pytest in project/ — 17 passed on c5630d7 (Python 3.14.3, pytest 8.3.5). Each feature PR passed 11 on its own branch.
 - Final submitted SHA, if different from tested code SHA: [complete; explain evidence-only changes]
 
 Do not put student IDs, private peer ratings, credentials or personal contact details here.
