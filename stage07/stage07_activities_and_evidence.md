@@ -251,7 +251,7 @@ Use links rather than copying GitHub history. Continue the Stage 6 workflow; no 
 
 | Issue/task | Branch | PR | Reviewer | Key feedback | Outcome |
 |---|---|---|---|---|---|
-| Stage 7 testing record | stage7/task/stage07_documentation | https://github.com/DominicRDA-uc/st1-assignment-3/pull/8 | Junaid Sayani | Mismatching test references for domain invalidation tests (like duplicate records etc, the tests are to be refered back from test starter file), Fixed by: Junaid Sayani | Open. Not merged. |
+| Stage 7 testing record | stage7/task/stage07_documentation | https://github.com/DominicRDA-uc/st1-assignment-3/pull/8 | Junaid Sayani | Mismatching test references for domain invalidation tests (like duplicate records etc, the tests are to be refered back from test starter file), Fixed by: Junaid Sayani | Merged. main SHA 81c62d733afe3971d283a7efb0255a0a91af91b7. |
 
 ## M Contribution Evidence
 
@@ -299,6 +299,6 @@ Complete automated verification, requirement tracking, and code reviews on a ded
 Tested Stage 7 main SHA: ae093ceb10ec97001374213aa17da6a3d7637d80\
 Full-suite result: 17 Passed, 0 failed \
 Unresolved defects and effect on baseline: None\
-Clean working tree and integration evidence: This branch only changes the Stage 7 record. It is not merged.
-Stage 8 handover status: Not handed over. Wait until pull request 8 is reviewed and merged.
+Clean working tree and integration evidence: Pull request 8 is merged. main is 81c62d733afe3971d283a7efb0255a0a91af91b7.
+Stage 8 handover status: Ready to handover to stage 8.
 All tutorial/formative responses and traceability/Copilot decisions complete: Yes
