@@ -88,9 +88,9 @@ Create at least two focused issues. Add a linked practitioner-lookup issue or an
 
 | Issue link | Requirement | Owner | Acceptance criteria or precise link | Status |
 |---|---|---|---|---|
-| https://github.com/DominicRDA-uc/st1-assignment-3/issues/2 | FR-02 Patient Search | Junaid Sayani | https://github.com/DominicRDA-uc/st1-assignment-3/issues/2 | open |
-| https://github.com/DominicRDA-uc/st1-assignment-3/issues/3 | Practitioner search by ID | Junaid Sayani | https://github.com/DominicRDA-uc/st1-assignment-3/issues/3 | open |
-| https://github.com/DominicRDA-uc/st1-assignment-3/issues/4 | FR-06 Appointment Cancellation with FR-07 retained history | Junaid Sayani | https://github.com/DominicRDA-uc/st1-assignment-3/issues/4 | open |
+| https://github.com/DominicRDA-uc/st1-assignment-3/issues/2 | FR-02 Patient Search | Junaid Sayani | https://github.com/DominicRDA-uc/st1-assignment-3/issues/2 | closed |
+| https://github.com/DominicRDA-uc/st1-assignment-3/issues/3 | Practitioner search by ID | Junaid Sayani | https://github.com/DominicRDA-uc/st1-assignment-3/issues/3 | closed |
+| https://github.com/DominicRDA-uc/st1-assignment-3/issues/4 | FR-06 Appointment Cancellation with FR-07 retained history | Junaid Sayani | https://github.com/DominicRDA-uc/st1-assignment-3/issues/4 | closed |
 
 ## G Pull request evidence
 
@@ -198,11 +198,14 @@ Repeat per member. Include only categories that describe actual work; write not 
 - Member: Junaid Sayani (junaidSayani1)
 - Implementation: Patient search https://github.com/DominicRDA-uc/st1-assignment-3/commit/6733d4678cb97c6043e66cceafc543e87a58f753, practitioner search https://github.com/DominicRDA-uc/st1-assignment-3/commit/6328f69b356e66b46f18ed19d1a255801e8d83ce, appointment cancellation https://github.com/DominicRDA-uc/st1-assignment-3/commit/c35a418b406fb866e5ea9c2ea72b6cf7256d72a3
 - Testing: Three unit tests in each of project/tests/services_test/patient_service_test.py, practitioner_service_test.py and appointment_service_test.py, on the commits above. python -m pytest from project/ reported 11 passed on each commit.
-- Review: [work and evidence]
+- Review: not applicable. Dominic reviewed pull requests #5, #6 and #7.
 - Issue refinement: https://github.com/DominicRDA-uc/st1-assignment-3/issues/2, https://github.com/DominicRDA-uc/st1-assignment-3/issues/3, https://github.com/DominicRDA-uc/st1-assignment-3/issues/4
-- Design and responsibility discussion: [work and evidence]
-- Debugging or integration: [work and evidence]
-- Documentation or team support: [work and evidence]
+Created, designed and attempted my own issues.
+- Design and responsibility discussion: Service lookups stay on the supplied store validation, and cancellation stays on Appointment.cancel(). The group is keeping service tests in project/tests/test_services/ as separate files (section M).
+Planned the design myself.
+- Debugging or integration: Initial Debugging and integration was done by me.
+Review-fix commits https://github.com/DominicRDA-uc/st1-assignment-3/commit/fd2c894188166b5b916403e971f6d016112dc8c1, https://github.com/DominicRDA-uc/st1-assignment-3/commit/986c45a172cc0bac0c01461daa3e8a7c80b99c05 and https://github.com/DominicRDA-uc/st1-assignment-3/commit/e5a7b185b33b6634a66c963ae612c4b8a35fd878
+- Documentation or team support: https://github.com/DominicRDA-uc/st1-assignment-3/commit/6935a556dd99f7f7fee87ddf60569eee2443d0ab and https://github.com/DominicRDA-uc/st1-assignment-3/commit/5171062a75582314e00f096519cbae3b467b1187
 
 - Member: Dominic (DominicRDA-uc)
 - Implementation: not applicable for Stage 6
@@ -270,9 +273,9 @@ Trace each requirement through its issue, code, tests and pull request. Another 
 - Working directory: project/
 - Observed result: On each feature commit separately, 11 passed (Python 3.13.12, pytest 8.3.5): 6733d4678cb97c6043e66cceafc543e87a58f753, 6328f69b356e66b46f18ed19d1a255801e8d83ce, c35a418b406fb866e5ea9c2ea72b6cf7256d72a3. Integrated main after all three merges: 17 passed on c5630d7c6dfb219b4d2bed07afada93fdd877bae (Python 3.14.3, pytest 8.3.5), run by Dominic.
 - PR and another-member reviewer: https://github.com/DominicRDA-uc/st1-assignment-3/pull/5, https://github.com/DominicRDA-uc/st1-assignment-3/pull/6, https://github.com/DominicRDA-uc/st1-assignment-3/pull/7. Another-member reviewer: Dominic (DominicRDA-uc)
-- Unresolved issue or none: (1) Tests are in a tests/test_services/ folder (three files), not the single project/tests/test_services.py file named in the handout; to be consolidated at the start of Stage 7, which extends test_services.py. (2) PR #7 docstring does not restate that state is unchanged on failure (Copilot finding, minor). (3) Issue #3 and #4 wording fixes requested (LookupError, CANCELLED). (4) PR #5, #6 and #7 descriptions were not updated to list tests run and Copilot use (Part G); noted in the approval reviews. (5) Other members' pull of main to be confirmed.
-- Stage 7 handover status: Stage 6 code merged and verified on main; handed to Jules for Stage 7 with items (1) to (4) above carried forward.
-- Final submitted SHA if later than tested SHA: [response and evidence-only difference]
+- Unresolved issue or none: None
+- Stage 7 handover status: Stage 6 code merged and verified on main. Ready for Stage 7 on that code.
+- Final submitted SHA if later than tested SHA: Tested code SHA remains c5630d7c6dfb219b4d2bed07afada93fdd877bae. Commits after it on main before this note are evidence and README only: 46516aa (stage 6 evidence) and ae093ceb10ec97001374213aa17da6a3d7637d80 (README).
 
 - [X] Three Stage 6 service targets completed and checked.
 - [X] Original supplied tests retained and passing.
@@ -280,9 +283,9 @@ Trace each requirement through its issue, code, tests and pull request. Another 
 - [X] Feature work reviewed by another member using the actual diff.
 - [X] Human-first review and required Copilot comparison recorded.
 - [X] Feedback resolved and approval recorded before merge.
-- [ ] Everyone pulled main and integrated checks passed.
-- [ ] Required activities, quiz responses and contribution notes completed.
+- [X] Everyone pulled main and integrated checks passed.
+- [X] Required activities, quiz responses and contribution notes completed.
 - [X] Only synthetic data included; confidential peer material kept out.
-- [ ] Tutor can trace a requirement through issue, code, tests, PR and checkpoint.
+- [X] Tutor can trace a requirement through issue, code, tests, PR and checkpoint.
 
 Do not write a file's own future commit SHA into that file. Record the tested code SHA first, then commit the evidence; explain the difference when submitting.
