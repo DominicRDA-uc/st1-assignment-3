@@ -125,13 +125,16 @@ Final human conclusion and comparison with initial hypothesis: [complete]
 
 | Checkpoint | Code SHA or precise diff | Command and working directory | Actual result and artefact reference |
 |---|---|---|---|
-| F8-01 before repair | [complete] | [complete] | [complete] |
+| F8-01 before repair | 7c0455f with the new project/tests/test_regressions.py added (uncommitted when run, committed together with this record update) | python -m pytest tests/test_regressions.py -v in project/ (Python 3.14.3, pytest 8.3.5) | FAILED test_f8_01_same_practitioner_same_time_is_rejected at line 46: "Failed: DID NOT RAISE <class 'ValueError'>". Existing test_starter.py::test_conflict_rule_and_different_practitioner fails the same way at line 127. |
 | F8-01 after repair | [complete] | [complete] | [complete] |
-| F8-02 before repair | [complete] | [complete] | [complete] |
+| F8-02 before repair | 7c0455f with the new project/tests/test_regressions.py added (uncommitted when run, committed together with this record update) | python -m pytest tests/test_regressions.py -v in project/ (Python 3.14.3, pytest 8.3.5) | FAILED test_f8_02_cancelled_appointment_stays_findable at line 86: "AssertionError: assert None is <smartcare.domain.Appointment object>" where None = data_store.find_appointment('A1'). Existing test_cancel_appointment_with_valid_id (line 35) and test_invalid_transition_appointment (line 64) fail with "LookupError: Appointment not found". |
 | F8-02 after repair | [complete] | [complete] | [complete] |
 | Full suite after both repairs, before refactor | [complete] | [complete] | [complete] |
 
-Explain how the assertions detect each relevant incorrect result and protect previous behaviour: [complete]
+Full suite before any repair, with the regression tests added: python -m pytest -q in project/ on the same code: 5 failed, 14 passed. The 5 failures are the 2 new regression tests plus the 3 existing failing tests listed in section B.
+
+Explain how the assertions detect each relevant incorrect result and protect previous behaviour: test_f8_01 books A1 for D1 at 09:00, then uses pytest.raises(ValueError) on a second D1 booking at the same time, so an accepted duplicate booking fails the test. It then asserts list_appointments() == [first] and find_appointment('A2') is None, which proves a rejected booking leaves no partial state (NFR-01). Finally it books D2 at the same time and asserts it is SCHEDULED, so a repair that wrongly blocks different practitioners would also fail (AC-04.2). test_f8_02 asserts the cancelled object is the booked object and is CANCELLED, then checks the store lookup (is booked, not None) and the service lookup (is booked, not LookupError) separately, so the two layers are not confused. It also asserts the appointment is still listed, and that a second cancel raises ValueError with the status still CANCELLED (AC-05.3), which protects the guarded transition. Each test uses its own fresh store and synthetic data.
+Test authorship disclosure: the test code in tests/test_regressions.py was written by Claude (AI assistant) from the requirements and reproduction steps in sections C and D. Dominic ran it, checked each assertion against the requirements and confirmed it fails for the intended reason before repair. Claude also checked that both tests pass on the pre-fault Stage 7 code (2265119, 19 passed), which shows they test the published contract and not an invented rule.
 Unrelated failures investigated / resolution: [complete or not applicable with reason]
 
 ## H. Refactoring decision and before/after verification
