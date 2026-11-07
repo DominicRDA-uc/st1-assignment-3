@@ -21,38 +21,40 @@ For each, choose symptom, evidence or hypothesis/opinion, and explain your reaso
 - Traceback points to smartcare/services.py line 42 in the example.
 The example line number is illustrative; inspect the actual line in your run. The removal hypothesis must be tested against the current project, which has no public delete operation.
 
-Response and reason: [complete]
+Response and reason: "Appointment disappears after cancellation" is a symptom because it describes the observed behaviour without explaining why it occurs. "The data-store removal path is probably being called" is a hypothesis/opinion because it proposes a possible cause that requires investigation. "The failing test shows store.find_appointment('A1') returns None" is evidence because it is a specific observed result from a test run. "The service layer is badly designed" is a hypothesis/opinion because it is a judgment rather than an observed fact. "Traceback points to smartcare/services.py line 42 in the example" is evidence because it records information produced by the traceback, although the actual project line number must be verified.
 
 ### A.2 Build a debugging record
 Choose the cancelled-history scenario or a same-practitioner/time booking. Before changing code, record expected behaviour, observed behaviour, minimal reproduction, a hypothesis and evidence to inspect. Use a requirement to justify the expectation. Keep the initial hypothesis even if later evidence disproves it.
 
-Response and reason: [complete]
+Response and reason: For the cancelled-history scenario, FR-07 and AC-05.2 state that cancelled appointments must remain retrievable, so I expected A1 to remain stored and findable after cancellation. Observed behaviour was that A1 remained in list_appointments() with status CANCELLED, but find_appointment('A1') returned None and the service layer raised LookupError. Minimal reproduction: create a store, register a patient and practitioner, book A1, cancel A1, then compare list_appointments() with both store and service lookups. Initial hypothesis: cancellation removed the appointment from storage. This was later disproved because A1 was still in list_appointments() after cancelling, which pointed instead to the lookup logic incorrectly filtering cancelled appointments. Evidence to inspect: find_appointment() in data_store.py, appointment status values, and whether the appointment remains present in the store collection.
 
 ### A.3 Test defect or product defect
 A test expects cancelled appointments to be deleted, but FR-07 says history must be retained. What should be changed? Explain why. Also decide whether a test expecting different practitioners at the same time to conflict reflects AC-04.2. Do not assume every failing test is correct.
 
-Response and reason: [complete]
+Response and reason: If a test expects cancelled appointments to be deleted, the test should be changed, because FR-07 requires appointment history to be retained and retrievable after cancellation. The implementation should continue to preserve cancelled records because the requirement is the authoritative source of expected behaviour. A test expecting different practitioners at the same time to conflict does not reflect AC-04.2, which explicitly permits bookings for different practitioners at the same datetime. Therefore such a test would also be a test defect rather than evidence of a product defect.
 
 ### A.4 Refactoring smell hunt
 Consider a hypothetical 70-line AppointmentService method containing duplicate status strings, direct collection manipulation, printing, validation and four nested conditionals. Identify the smells and propose small refactorings that preserve required behaviour. The direct collection work replaces the old storage-specific scenario; use the existing SmartCareDataStore boundary. Do not implement an extra architecture.
 Classify these proposed changes as refactoring, repair or feature: rename appt to appointment; extract a repeated conflict helper; add rescheduling; restore retained cancellation lookup; replace a magic status string with the existing enum. Explain the behaviour that must remain unchanged.
 
-Response and reason: [complete]
+Response and reason: The hypothetical method contains several code smells: duplicate status strings (magic values), direct collection manipulation, mixed responsibilities, excessive nesting and printing inside business logic. Small refactorings include extracting helper methods, replacing duplicated status strings with AppointmentStatus, separating validation from workflow logic and reducing nested conditionals with guard clauses while preserving behaviour. Renaming appt to appointment is refactoring, extracting a repeated conflict helper is refactoring, adding rescheduling is a feature, restoring retained cancellation lookup is a repair, and replacing a magic status string with the existing enum is refactoring. The externally observable behaviour must remain unchanged for all valid and invalid inputs when performing refactoring.
 
 ### A.5 Traceback and hypothesis ranking
 Using one actual failure, identify its exception/assertion, expected and observed values, test line, application call path and supporting requirement. List three plausible causes and rank them by fit with the available evidence. For each cause, name a check that could distinguish it from the others. Explain why a traceback alone does not establish the cause.
 
-Response and reason: [complete]
+Response and reason: In test_cancel_appointment_with_valid_id, the failure is LookupError: Appointment not found. The expected result is that the cancelled appointment is returned, while the observed result is that lookup fails after cancellation. The failure occurs in tests/test_services/appointment_service_test.py and follows the path test → AppointmentService.find_appointment() → SmartCareDataStore.find_appointment(). The supporting requirements are FR-07, FR-08 and AC-05.2.
+
+Ranked causes: (1) find_appointment() excludes cancelled appointments from lookup, (2) cancellation removes the appointment from storage, (3) the service uses the wrong appointment ID or a different store instance. Distinguishing checks are: inspect the lookup condition, compare list_appointments() before and after cancellation, and verify appointment IDs and store identity. A traceback identifies where a failure appeared but does not prove the root cause because multiple defects can produce the same failure.
 
 ### A.6 Exit question
 Why is changing code immediately after seeing a failure often a poor debugging strategy?
 
-Response and reason: [complete]
+Response and reason: Changing code immediately after seeing a failure is risky because the real cause has not yet been established. An engineer should first gather evidence, identify expected behaviour from requirements, create and test hypotheses, and isolate the defect. Otherwise a change may hide symptoms, introduce new faults or fix the wrong problem.
 
 
-Classification responses (1–5, each with reason): [complete]
-Tutorial debugging record — expected; observed; reproduction; hypothesis; evidence to inspect: [complete]
-Traceback — exception/assertion; expected/observed values; test line; call path; requirement; ranked causes and discriminating checks: [complete]
+Classification responses (1–5, each with reason): See A.1 above.
+Tutorial debugging record — expected; observed; reproduction; hypothesis; evidence to inspect: See A.2 above.
+Traceback — exception/assertion; expected/observed values; test line; call path; requirement; ranked causes and discriminating checks: See A.5 above.
 
 ## B. Stage 7 baseline and safe preparation
 
@@ -149,9 +151,9 @@ Result — accepted, revised or rejected / reason / behaviour-preservation concl
 
 ## I. Git, human review and integration
 
-Issues for both defects / refactor scope and owners: [complete]
-Branch / prepared, repair and refactor checkpoints: [link B/C/D/H]
-PR link and another member's reviewer identity: [complete]
+Issues for both defects / refactor scope and owners: https://github.com/DominicRDA-uc/st1-assignment-3/issues/9 (F8-01), https://github.com/DominicRDA-uc/st1-assignment-3/issues/10 (F8-02), https://github.com/DominicRDA-uc/st1-assignment-3/issues/11 (refactor). Owner of all three: Dominic. Scope limited to project/smartcare/data_store.py, the new project/tests/test_regressions.py and this record. No requirement, architecture or feature changes.
+Branch / prepared, repair and refactor checkpoints: debug/stage08. Prepared faulty state 5258397 (B). Human hypotheses fc37537 (E). Regression tests failing before repair 65b07c2 (G). F8-01 repair 3c6dbab (C). F8-02 repair 2cb31d1 (D). Refactor 85ec285 (H).
+PR link and another member's reviewer identity: Pull request from debug/stage08 into main opened by Dominic on 7 Nov 2026 (https://github.com/DominicRDA-uc/st1-assignment-3/pulls). Requested reviewer: Junaid Sayani (junaidSayani1). Review pending at the time of this commit.
 Key human feedback, difference from Copilot findings and response/outcome: [complete]
 Actual review approval / merge evidence: [complete]
 Integrated code SHA and team pull/retest command / working directory / result: [complete]
@@ -160,66 +162,66 @@ Each member's substantive contribution and artefact: [complete]
 
 ## J. Required reflections
 
-1. Which Copilot diagnosis appeared convincing but lacked evidence? [complete; report honestly if none and discuss the least-supported real suggestion]
-2. What evidence changed your group's view? [complete]
-3. How did regression tests protect the refactoring? [complete]
+1. Which Copilot diagnosis appeared convincing but lacked evidence? The least-supported suggestion was that the service and store might have been different runtime instances in F8-01. It was plausible initially, but direct verification showed a.data_store is s was True, so the explanation lacked supporting evidence.
+2. What evidence changed your group's view? The most important evidence was the runtime inspection of the predicates inside has_practitioner_conflict() and find_appointment(). Seeing that only a single condition evaluated incorrectly isolated the true root cause and ruled out alternative explanations.
+3. How did regression tests protect the refactoring? The regression tests captured the required behaviour before the refactor and were re-run afterward. Because all tests passed before and after the change, they demonstrated that replacing the magic string with the enum did not alter externally visible behaviour.
 
 ## K. Ten formative questions
 
 1. What should an engineer do before changing code in response to a failure?
 
-Response: [complete]
+Response: Determine the expected behaviour from requirements, gather evidence, reproduce the problem, and form a testable hypothesis before making changes.
 
 2. Where should expected behaviour come from during debugging?
 
-Response: [complete]
+Response: Expected behaviour should come from requirements, acceptance criteria, business rules and agreed specifications rather than assumptions.
 
 3. What is a debugging hypothesis?
 
-Response: [complete]
+Response: A debugging hypothesis is a proposed explanation for a failure that can be tested with evidence and investigation.
 
 4. What is a regression test and why is it retained?
 
-Response: [complete]
+Response: A regression test captures behaviour that previously failed and is retained to ensure the same defect does not reappear in future changes.
 
 5. What is meant by root cause?
 
-Response: [complete]
+Response: The root cause is the underlying defect that directly produces the observed failure or incorrect behaviour.
 
 6. What is refactoring?
 
-Response: [complete]
+Response: Refactoring is changing the internal structure of code to improve maintainability without changing externally observable behaviour.
 
 7. What is a swallowed exception?
 
-Response: [complete]
+Response: A swallowed exception is an exception that is caught and suppressed without being properly handled, reported or re-raised.
 
 8. What is a code smell?
 
-Response: [complete]
+Response: A code smell is a structure or pattern in code that suggests potential design or maintainability problems even if the code still functions correctly.
 
 9. How should GitHub Copilot-generated debugging diagnoses be treated?
 
-Response: [complete]
+Response: They should be treated as hypotheses that require verification with requirements, code inspection and runtime evidence before acceptance.
 
 10. What is the Stage 8 engineering rule?
 
-Response: [complete]
+Response: Diagnose using evidence first, identify the supported root cause, apply the smallest justified repair, and verify the result with regression and full-suite testing.
 
 ## L. Completion and handover
 
-- [ ] Existing project, earlier tests and stage records preserved.
-- [ ] Passing Stage 7 SHA and safe preparation details recorded.
-- [ ] Both defects reproduced with meaningful failing tests.
-- [ ] Both human hypotheses recorded before Copilot; actual suggestions evaluated with evidence.
-- [ ] Supported causes and minimal repairs explained; focused and full regression results recorded.
-- [ ] One genuine refactor verified under passing before/after tests.
+- [X] Existing project, earlier tests and stage records preserved.
+- [X] Passing Stage 7 SHA and safe preparation details recorded.
+- [X] Both defects reproduced with meaningful failing tests.
+- [X] Both human hypotheses recorded before Copilot; actual suggestions evaluated with evidence.
+- [X] Supported causes and minimal repairs explained; focused and full regression results recorded.
+- [X] One genuine refactor verified under passing before/after tests.
 - [ ] Human PR review, feedback resolution and integrated retest recorded.
-- [ ] Tutorial, three reflections and ten formative responses complete.
-- [ ] Local recovery metadata excluded from submitted source.
+- [X] Tutorial, three reflections and ten formative responses complete.
+- [X] Local recovery metadata excluded from submitted source.
 - [ ] Same project and full suite ready for Stage 9 after Stage 8 integration, verification and recording.
 
 Verified integrated code SHA / result: see I.
 Submitted SHA and evidence-only difference if any: [complete]
-Unresolved issues or incomplete checks / owner / next action: [complete]
+Unresolved issues or incomplete checks / owner / next action: Human PR review by Junaid is pending (owner Junaid). After approval: merge to main, every member pulls and reruns the suite, then section I and this section are completed (owner Dominic). Known limitation for the reviewer: the preparation tool also removed the docstrings from find_appointment() and has_practitioner_conflict() and changed find_appointment() to a loop. Behaviour is correct and all tests pass, but the docstrings are not yet restored.
 Handover note: [complete]
