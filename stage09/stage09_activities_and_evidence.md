@@ -2,9 +2,9 @@
 
 Common UG and PG record. All Assignment 3 stage materials are provided from the beginning. Complete this stage only after the previous applicable stage has been integrated, verified and recorded. Use this supplied record in stage09/ in your EXISTING repository. Preserve project/, all earlier tests, records and responses. Do not download another starter or copy staff solutions. Use the Stage 9 handout and Overview/revision 2 baseline. Keep responses concise and link accessible artefacts; do not paste entire logs or private peer ratings.
 
-Group: <!-- complete -->
-Members and responsibilities: <!-- complete -->
-Stage 8 integrated SHA, command, working directory and actual result: <!-- complete -->
+Group: Wednesday 2.30 to 4.30, Group 2, repository https://github.com/DominicRDA-uc/st1-assignment-3
+Members and responsibilities: Junaid Sayani (junaidSayani1, PG), Dominic (DominicRDA-uc, UG), Juliann (Jules-tryingtocode, UG), Aditti (UG). The Stage 9 work was split into three tasks, the pure queries (branch stage9/Task/Pure_query_implementation), the service listing (branch stage9/Task/practitioner_appointments_listing) and the console menu (branch stage9/Feature/Console_based_menu). 
+Stage 8 integrated SHA, command, working directory and actual result: ed3d8f0d38087bbb38c80aa9e3fde03384d36711 (merge of PR #12), python -m pytest -q in project/, 19 passed. The Stage 9 branches were started after the Stage 8 evidence update c0fabde, and the first Stage 9 run on that code gave 19 passed before any new tests were added.
 
 ## A. Tutorial activities
 
@@ -80,71 +80,102 @@ Cover QRY-01–04, FP-01–03, UI-01–02 and relevant FR-01–09. Explain empty
 
 | Requirement / test ID | Code location | Case and meaningful assertion | Actual result | Evidence link |
 |---|---|---|---|---|
-| | | | | |
+| QRY-01, test_only_requested_practitioner_is_selected | queries.py select_appointments | D2 is a control, every returned appointment has practitioner D1 | PASSED | project/tests/test_queries.py |
+| QRY-01, test_practitioner_id_is_case_sensitive | queries.py select_appointments | 'd1' selects nothing and returns an empty list | PASSED | project/tests/test_queries.py |
+| QRY-02, test_default_includes_all_status | queries.py select_appointments | no status given, the result holds every AppointmentStatus value | PASSED | project/tests/test_queries.py |
+| QRY-02, test_explicit_status_filters | queries.py select_appointments | each enum status returns only appointments with that status | PASSED | project/tests/test_queries.py |
+| QRY-02, test_no_match_returns_new_empty_list | queries.py select_appointments | no match gives [] and the result is not the source list | PASSED | project/tests/test_queries.py |
+| QRY-03, test_orders_by_date_time_then_appointment_id | queries.py select_appointments | equal time appointments come out ordered by appointment ID | PASSED | project/tests/test_queries.py |
+| QRY-03, test_order_and_fields_are_unchanged | queries.py select_appointments | order and fields of the source snapshot are equal before and after two queries | PASSED | project/tests/test_queries.py |
+| FP-01, test_repeated_calls_give_same_result_in_new_list | queries.py select_appointments | two calls give equal results in two different lists | PASSED | project/tests/test_queries.py |
+| FP-02, test_distinct_list_for_each_input | queries.py select_appointments | empty, sorted and unsorted inputs each give a new list and the source snapshot is unchanged | PASSED | project/tests/test_queries.py |
+| FP-03, test_named_key_returns_date_time_then_id | queries.py appointment_sort_key | the key returns date_time then appointment_id | PASSED | project/tests/test_queries.py |
+| FP-03, test_sorting_using_named_key | queries.py select_appointments | the result order matches sorted with appointment_sort_key | PASSED | project/tests/test_queries.py |
+| QRY-04, test_empty_list_for_no_appointments | services.py list_practitioner_appointments | known practitioner with no appointments or no matching status gives an empty list | PASSED | project/tests/test_services/appointment_service_test.py |
+| QRY-04, test_list_practitioner_appointments_invalid_requests | services.py list_practitioner_appointments | unknown ID raises LookupError, blank ID and status 'scheduled' raise ValueError, records unchanged | PASSED | project/tests/test_services/appointment_service_test.py |
+| FR-09, test_list_practitioner_appointments_uses_registered_id_and_order | services.py list_practitioner_appointments | an ID with spaces still lists the registered practitioner's appointments in order | PASSED | project/tests/test_services/appointment_service_test.py |
+| FR-07, test_list_practitioner_appointments_shows_cancelled | services.py list_practitioner_appointments | after cancellation the all status list and CANCELLED list keep the appointment and SCHEDULED does not | PASSED | project/tests/test_services/appointment_service_test.py |
+
+Full suite on final branch stage9/Feature/Console_based_menu. 
+Run python -m pytest -q in project/: 37 passed.
 
 Include practitioner isolation, every enum status/default all, equal-time ID tie-break, named-key reuse, repeated calls, empty/already-sorted fresh lists, unchanged source order/fields, known-empty/unknown/invalid service cases and retained history.
 
-Purity explanation from code inspection, including absence of hidden state and I/O: <!-- response -->
-What the tests do and do not establish: <!-- response -->
+Purity explanation from code inspection, including absence of hidden state and I/O: 
+Both functions only use their arguments in queries.py. There is no global variable, no store or service import, no print and no input. select_appointments builds a new list and returns sorted of that list, so the source list is never sorted or changed in place (as asked by the tutor in handout). It only reads the practitioner ID and status of each appointment and never calls cancel or sets a field, so the same inputs give the same output each time.
+What the tests do and do not establish: The tests show that for the cases we tried the source order and fields stay the same, the result is a new list, repeated calls match and the order is correct. They do not prove there is no hidden state or input/output for every possible input, that needs the code inspection above. Since there can be infinite amount of sample data, we typically test boundary cases. Hence test cases passing does not say that everything is correct non breaking and complete.
 
 ## D. Integrated console and workflow evidence
 
 | Scenario / acceptance ID | Reproducible inputs / artefact | Expected result | Observed result and state check | Evidence link |
 |---|---|---|---|---|
-| UI-01 full menu workflow | | | | |
-| UI-02 invalid-input recovery | | | | |
-| Automated service workflow | | | | |
+| UI-01 full menu workflow | test_UI_01_menu_workflow, scripted input to the real menu, same steps as the handout | Conflict rejected, D2 booking at same time works, A1 cancelled but still found, scheduled list empty, freed slot booked with new ID | Passed, all of these were seen in the output in the manual run and tested run | project/tests/test_workflows.py |
+| UI-02 invalid-input recovery | test_UI_02_menu_recovers_from_invalid_input, same way, with wrong menu choice, blank and unknown IDs, duplicate patient, bad dates, repeated cancel and bad status | Each wrong input shows a message and goes back to menu, failed booking does not take the ID | Passed, A1 could still be booked after the failed tries, as verified through manual run and test case.| project/tests/test_workflows.py |
+| Automated service workflow | test_integrated_service_workflow, services and one store, no menu | Wrong bookings change nothing, different practitioner allowed, cancelled A1 kept, filters work, freed slot booked | Passed, stored list same before and after the wrong bookings | project/tests/test_workflows.py |
+
+Same patient with another practitioner is allowed because the conflict rule only checks the same practitioner at the same time. There is no rule about one patient having two practitioners at once in the system desc/handouts.
 
 Include registration/find, booking, conflict rejection, different-practitioner booking, cancellation, retrieval, listing/filtering, freed slot and exit; duplicate/unknown/blank IDs, malformed/impossible date, invalid status, unknown choice and repeated cancellation. Identify before/after state and subsequent successful action.
 
 ## E. GitHub Copilot review and human decisions
 
-Human design completed before AI: <!-- reference -->
-Actual prompt/context supplied: <!-- paste or accessible reference -->
-Actual response: <!-- accessible reference -->
+Human design completed before AI: sections A and B of this file, written before the Copilot review was run. (That means complete code design was initially suggested by human)
+Actual prompt/context supplied:The Section 8 reviewer prompt from the Stage 9 handout, used unchanged. Context given was the synthetic code and tests only, queries.py, AppointmentService.list_practitioner_appointments, run_menu with parse_status in console.py, tests/test_queries.py and tests/test_workflows.py, and the current contracts.
+
+Actual response: The code keeps the query pure, the source list is not changed, the service uses the registered ID, and the menu uses one store and does not copy domain rules. No Critical findings. Important, the duplicate registration case in the menu test is only sent as input and its error message is not checked. Optional, the menu stops with an EOFError traceback if input closes before choosing 0. Optional, status text in capitals like SCHEDULED is rejected. Optional, a wrong status for an unknown practitioner reports the status error first when using the menu. Optional, the menu looks up the practitioner a second time to print the name.
 
 | AI finding | Code/test evidence | Severity | Accept/Modify/Reject and reason | Change or no change | Actual verification |
 |---|---|---|---|---|---|
-| | | | | | |
+| Duplicate registration in the menu test is not asserted | tests/test_workflows.py test_UI_02_menu_recovers_from_invalid_input | Important | Accept, the case is in the handout list and the test should check it | Added one assert for the duplicate patient error | Ran the menu with P1 registered twice, got the duplicate error and find still showed Alex Example. Full suite 37 passed |
+| EOFError traceback when input ends without 0 | console.py run_menu, python main.py --interactive with input that ends early | Not imp | Reject, not an expected input error in the handout and catching it would hide a real stop of the program | No change | Normal exit with 0 still works |
+| Capital status such as SCHEDULED is rejected | console.py parse_status | Alr happens (not imp) | Reject, the prompt and the handout use lowercase and no requirement asks for other cases | No change | - |
+| Wrong status with unknown practitioner shows the status error first in the menu | console.py parse_status is called before the service | Not Important | Reject, the handout says not to make an error priority rule for several errors | No change | Ran status booked with unknown D9, got the status error and the menu continued |
+| Second practitioner lookup to print the name in the listing | console.py option 8 | Not Important | Reject, it is needed to print the name when the list is empty and the lookup does not change any record | No change | Read the code, the empty list case prints the practitioner name with No appointments found |
 
-Responsibility check: explain how domain invariants, shared-store collections, service coordination, pure queries and console effects remain separate: <!-- response -->
+Responsibility check: explain how domain invariants, shared-store collections, service coordination, pure queries and console effects remain separate: The domain objects in domain.py keep their own rules, such as trimmed non-blank IDs and the cancel rule. The store keeps the in memory collections and the lookup. The services coordinate registration, booking, cancellation and the validated listing. queries.py only selects and sorts the list it is given. console.py prompts, parses the date and status text, calls the services and prints messages, and it holds no domain or conflict rules. Everythingg is in its own layer, in its own files so nothing interfere with other files, takes additional responsibility there is proper modularity and separation of concern presentation layer does not know bout business logic applied in services and vice versa, etc.
 
 ## F. Required reflections
 
-1. Which integration concern was architectural rather than a filtering/sorting detail? <!-- response -->
-2. Which Copilot suggestion did you reject as over-engineering, and why? <!-- response -->
-3. How did you prove cancelled appointments remain retrievable and listable in the same session? <!-- response -->
+1. Which integration concern was architectural rather than a filtering/sorting detail? I think deciding where each check belongs since the pure query does not check if a practitioner is registered, the service does that through the store and also checks the status, and the console only turns text into the enum. The menu also uses one store and one set of services for the whole session, so every command sees the same records. Also, the decision where is the pure queries called from, anywhere else other than services would have disturbed our main architecture and our modularity.
+2. Which Copilot suggestion did you reject as over-engineering, and why? Apart from the one I accepted, I rejected all others and almost all of em were over-engineered suggestions, well to be fair Copilot didnt know bout handout requirements in detail thats why it over extended as next steps, but we rejected knowing in full detail the system reqs.
+3. How did you prove cancelled appointments remain retrievable and listable in the same session? In test_list_practitioner_appointments_shows_cancelled, after cancelling A1 the all status list and the CANCELLED list still hold it and the SCHEDULED list does not. The workflow test checks find_appointment('A1') returns the same object with status CANCELLED, and the UI-01 run shows the A1 reference line with cancelled after the cancel.
 
 ## G. Ten formative answers
 
-1. What makes select_appointments pure, and what side effect breaks purity? <!-- response -->
-2. Which explicit inputs are needed, and why avoid a global store? <!-- response -->
-3. How can a new list reuse Appointment objects safely? <!-- response -->
-4. Why use a named key, and what breaks equal-time ties? <!-- response -->
-5. How do default and explicit status filters differ? <!-- response -->
-6. How do empty, unknown practitioner and invalid filter cases differ? <!-- response -->
-7. Which console errors recover, and how is unchanged state checked? <!-- response -->
-8. What is data integrity for registered participants, conflicts and history? <!-- response -->
-9. What is Copilot's review role, and who verifies findings? <!-- response -->
-10. How do pure functions and OOP responsibilities work together? <!-- response -->
+1. What makes select_appointments pure, and what side effect breaks purity? It only uses its arguments and returns a new list, with no input, output or hidden state. Sorting the source list in place, printing, or changing an appointment object would break its purity. Also they are deterministic for all same input service gives to it, it will always give same output to service for it  and modify nothing outside of its local scope.
+2. Which explicit inputs are needed, and why avoid a global store? 
+It needs the list of appointments, the practitioner ID and the optional status. A global store would hide an input (by superceding), so the result could change without the arguments changing and it would be harder to test. Also global breaks purity, the func should work with only local scope.
+3. How can a new list reuse Appointment objects safely? 
+The new list holds the same objects, and that is fine as long as the query never changes them. We checked this by comparing a snapshot of order and fields before and after.
+4. Why use a named key, and what breaks equal-time ties? 
+A named key can be reused and tested on its own. The named key we use is date_time then appointment_id, so appointments at the same time are ordered by appointment ID (which can never be same due to uniqueness hence all ties are broken by this).
+5. How do default and explicit status filters differ? No status (None) returns every status including CANCELLED and COMPLETED, an explicit enum value returns only appointments with that status.
+6. How do empty, unknown practitioner and invalid filter cases differ? A known practitioner with nothing matching gives an empty list. A valid ID that is not registered raises LookupError. A blank or invalid ID or a status that is not an AppointmentStatus raises ValueError.
+7. Which console errors recover, and how is unchanged state checked? Unknown menu choice, blank or unknown IDs, duplicate registration, bad date/time, unknown appointment, repeated cancellation and invalid status all print a message and return to the menu. State is checked by finding or listing the records afterwards and by booking the same ID successfully after a failed booking.
+8. What is data integrity for registered participants, conflicts and history? Appointments hold the real registered patient and practitioner objects, the same practitioner cannot have two SCHEDULED appointments at the exact same time, and cancelled appointments stay in the store with status CANCELLED and are not deleted.
+9. What is Copilot's review role, and who verifies findings? Copilot gives suggestions as a reviewer, it does not decide. The group checks each finding against the requirements, the code and the tests before accepting, modifying or rejecting it.
+10. How do pure functions and OOP responsibilities work together? 
+Domain objects keep their rules and the services coordinate the store. The pure query only selects and sorts what the service gives it, and the console only handles input and output, so interaction never controls the domain rules.
 
 ## H. Review, completion and common handover
 
-Issues and bounded branches: <!-- links -->
-PR/diff and another-member human reviewer: <!-- actual links/name -->
-Review responses and Copilot comparison: <!-- links -->
-Integrated common Stage 9 SHA: <!-- complete -->
-Full regression command, working directory, actual count/result and evidence: <!-- complete -->
-README run instructions and scope/limitations: <!-- link -->
-Unresolved issues and support/action: <!-- complete -->
-UG common candidate / PG future branch plan: <!-- complete -->
+Issues and bounded branches: branches stage9/Task/Pure_query_implementation, stage9/Task/practitioner_appointments_listing and stage9/Feature/Console_based_menu. 
+Issue links: https://github.com/DominicRDA-uc/st1-assignment-3/issues/13 (pure query), https://github.com/DominicRDA-uc/st1-assignment-3/issues/14 (service listing), https://github.com/DominicRDA-uc/st1-assignment-3/issues/15 (menu and entry point)
+PR/diff and another-member human reviewer: 
+Review responses and Copilot comparison: [links]
+Integrated common Stage 9 SHA: [complete]
+Full regression command, working directory, actual count/result and evidence: python -m pytest -q in project/ on branch stage9/Feature/Console_based_menu gave 37 passed. 
 
-- [ ] Query contracts, purity, new lists and named-key ordering verified.
-- [ ] Service empty/unknown/invalid cases and cancellation history verified.
-- [ ] Every console command and invalid-input recovery demonstrated.
-- [ ] Query and workflow tests plus all previous tests pass; actual evidence linked.
-- [ ] Human design, Copilot critique, review and integration recorded honestly.
-- [ ] Reflections and ten formative responses completed.
+README run instructions and scope/limitations: project/README.md has not been updated for Stage 9 yet.
+Unresolved issues and support/action: The project README update, the human review, the GitHub Copilot review, the PR merges and the final SHA are still to be done.
+UG common candidate / PG future branch plan: Dominic, Juliann and Aditti (UG) go to Stage 12 using the protected common Stage 9 candidate. Junaid (PG) starts Stage 10 later on a separate branch after the common candidate is approved.
+
+- [X] Query contracts, purity, new lists and named-key ordering verified.
+- [X] Service empty/unknown/invalid cases and cancellation history verified.
+- [X] Every console command and invalid-input recovery demonstrated.
+- [X] Query and workflow tests plus all previous tests pass; actual evidence linked.
+- [X] Human design, Copilot critique, review and integration recorded honestly.
+- [X] Reflections and ten formative responses completed.
 - [ ] README updated; earlier code/tests/records preserved.
 - [ ] Common SHA protected for UG Stage 12; PG Stage 10/11 work deferred until approved.
 
