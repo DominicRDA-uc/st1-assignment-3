@@ -135,3 +135,16 @@ class Appointment:
         if self.status is not AppointmentStatus.SCHEDULED:
             raise ValueError('Only SCHEDULED appointments may be cancelled')
         self._status = AppointmentStatus.CANCELLED
+
+    def reschedule(self, new_date_time: datetime) -> None:
+        """Move a SCHEDULED appointment to a validated local date/time.
+
+        Raise ValueError for an illegal state or invalid time; leave the
+        appointment unchanged when the request fails.
+        """
+        if self.status is not AppointmentStatus.SCHEDULED:
+            raise ValueError('Only SCHEDULED appointments may be rescheduled')
+        new_date_time = validate_date_time(new_date_time)
+        if new_date_time == self.date_time:
+            return
+        self._date_time = new_date_time
