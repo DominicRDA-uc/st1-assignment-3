@@ -153,12 +153,19 @@ Result — accepted, revised or rejected / reason / behaviour-preservation concl
 
 Issues for both defects / refactor scope and owners: https://github.com/DominicRDA-uc/st1-assignment-3/issues/9 (F8-01), https://github.com/DominicRDA-uc/st1-assignment-3/issues/10 (F8-02), https://github.com/DominicRDA-uc/st1-assignment-3/issues/11 (refactor). Owner of all three: Dominic. Scope limited to project/smartcare/data_store.py, the new project/tests/test_regressions.py and this record. No requirement, architecture or feature changes.
 Branch / prepared, repair and refactor checkpoints: debug/stage08. Prepared faulty state 5258397 (B). Human hypotheses fc37537 (E). Regression tests failing before repair 65b07c2 (G). F8-01 repair 3c6dbab (C). F8-02 repair 2cb31d1 (D). Refactor 85ec285 (H).
-PR link and another member's reviewer identity: Pull request from debug/stage08 into main opened by Dominic on 7 Nov 2026 (https://github.com/DominicRDA-uc/st1-assignment-3/pulls). Requested reviewer: Junaid Sayani (junaidSayani1). Review pending at the time of this commit.
-Key human feedback, difference from Copilot findings and response/outcome: [complete]
-Actual review approval / merge evidence: [complete]
-Integrated code SHA and team pull/retest command / working directory / result: [complete]
-Evidence-only later SHA / explanation if different: [complete or not applicable]
-Each member's substantive contribution and artefact: [complete]
+PR link and another member's reviewer identity: Pull request from debug/stage08 into main opened by Dominic on 7 Nov 2026 (https://github.com/DominicRDA-uc/st1-assignment-3/pulls). Requested reviewer: Junaid Sayani (junaidSayani1). Review completed, PR approved and merged.
+Key human feedback, difference from Copilot findings and response/outcome: Key human feedback, difference from Copilot findings and response/outcome: Junaid Sayani (myself) reviewed pull request #12. I agreed with the F8-01 and F8-02 root causes and with the one-line repairs and also agreed that the enum change is a refactor and not a new rule. It also matches the accepted Copilot suggestions in section F. No extra Copilot review was run on the pull request. The missing docstrings were noted and left as the limitation already recorded in section L, I did not request any code change as of now.
+
+Actual review approval / merge evidence: Junaid Sayani (junaidSayani1) (me) approved pull request #12 on 8 Nov 2026 and merged it. https://github.com/DominicRDA-uc/st1-assignment-3/pull/12 
+Merge commit ed3d8f0d38087bbb38c80aa9e3fde03384d36711. No code change was requested.
+
+Integrated code SHA and team pull/retest command / working directory / result: Integrated code SHA ed3d8f0d38087bbb38c80aa9e3fde03384d36711. python -m pytest in project/ gave us: 19 passed 0 failed. 
+
+Evidence-only later SHA / explanation if different: 
+Each member's substantive contribution and artefact: 
+Dominic (DominicRDA-uc) diagnosed and repaired F8-01 and F8-02, added project/tests/test_regressions.py, and did the enum refactor. 
+
+Junaid Sayani (junaidSayani1) reviewed the instructions files, design decisions, ran regression tests, unit tests, all the repairs and refactors, finally left a review and merged pull request #12.
 
 ## J. Required reflections
 
@@ -216,12 +223,15 @@ Response: Diagnose using evidence first, identify the supported root cause, appl
 - [X] Both human hypotheses recorded before Copilot; actual suggestions evaluated with evidence.
 - [X] Supported causes and minimal repairs explained; focused and full regression results recorded.
 - [X] One genuine refactor verified under passing before/after tests.
-- [ ] Human PR review, feedback resolution and integrated retest recorded.
+- [X] Human PR review, feedback resolution and integrated retest recorded.
 - [X] Tutorial, three reflections and ten formative responses complete.
 - [X] Local recovery metadata excluded from submitted source.
-- [ ] Same project and full suite ready for Stage 9 after Stage 8 integration, verification and recording.
+- [X] Same project and full suite ready for Stage 9 after Stage 8 integration, verification and recording.
 
-Verified integrated code SHA / result: see I.
-Submitted SHA and evidence-only difference if any: [complete]
-Unresolved issues or incomplete checks / owner / next action: Human PR review by Junaid is pending (owner Junaid). After approval: merge to main, every member pulls and reruns the suite, then section I and this section are completed (owner Dominic). Known limitation for the reviewer: the preparation tool also removed the docstrings from find_appointment() and has_practitioner_conflict() and changed find_appointment() to a loop. Behaviour is correct and all tests pass, but the docstrings are not yet restored.
-Handover note: [complete]
+Verified integrated code SHA / result: ed3d8f0d38087bbb38c80aa9e3fde03384d36711. python -m pytest -q in project/: 19 passed.
+
+Submitted SHA and evidence-only difference if any: ed3d8f0d38087bbb38c80aa9e3fde03384d36711
+
+Unresolved issues or incomplete checks / owner / next action: Docstrings on find_appointment() and has_practitioner_conflict() are still missing. I (Junaid) have approved without requiring that change, only due to time limitations with other members, and have also mentioned in review too that Docstring serve as important documentation.
+
+Handover note: Stage 8 code is on main at ed3d8f0. Stage 9 can use that code.
