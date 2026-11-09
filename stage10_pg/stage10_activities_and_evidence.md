@@ -300,7 +300,7 @@ Independent human checks and corrections: renamed parameters to new_date_time, r
 | Focused PG | python -m pytest -q tests/test_rescheduling.py in project/ | uncommitted on 0716b11 | 20 passed | terminal run |
 | Common independently | python -m pytest -q --ignore=tests/test_rescheduling.py in project/ | uncommitted on 0716b11 | 37 passed | terminal run |
 | Full cumulative | python -m pytest -q in project/ | uncommitted on 0716b11 | 57 passed | terminal run |
-| Integrated retest | after merge will do | [response] | [response] | [response] |
+| Integrated retest | python -m pytest -q and python -m pytest -q tests/test_rescheduling.py in project/ | 1989ed1 (main after merging PR #21) | 57 passed full, 20 passed focused (Python 3.14.3) | run by Dominic on main after the merge |
 
 Failures / diagnosis / corrections and reruns / unresolved concerns: first agent names used date_time, renamed to new_date_time, focused tests 20 passed after that. 
 
@@ -317,11 +317,11 @@ Evidence supporting decision: Diff only in the three allowed files, methods matc
 If rejected, how the required feature was subsequently completed and verified: not applicable
 Saved proposal and targeted recovery details if needed: not applicable, no rollback
 Human explanation of every changed method and limitations: Appointment.reschedule checks SCHEDULED, validates the time, same-time is a no-op, then sets _date_time. AppointmentService.reschedule_appointment finds the appointment, checks has_practitioner_conflict with exclude_appointment_id, then calls reschedule and returns the same object. No console command. Listing uses the existing query.
-Another PG / willing UG / tutor reviewer, actual PR/diff review and feedback: Reviewed by myself (no other PG no willing UG).
+Another PG / willing UG / tutor reviewer, actual PR/diff review and feedback: Independent review by Dominic (DominicRDA-uc, UG, willing reviewer) on PR https://github.com/DominicRDA-uc/st1-assignment-3/pull/21, 9 Nov 2026. Dominic read the domain, service, README and test diffs and approved. Feedback: Appointment.reschedule checks the SCHEDULED state and validates the time before changing anything, and reschedule_appointment checks practitioner conflicts excluding the target itself and returns the same object (RES-01 to RES-06). No changes were requested. No merge conflicts with main, and the common Stage 9 tests (37) still pass.
 Corrections, recheck and actual approval before integration: Yes
-Integrated PG SHA / common protected SHA: PG SHA [after merge]. Common Stage 9 SHA 280884d755caacd8679ddac78b1dab4accaa05ef
+Integrated PG SHA / common protected SHA: PG SHA 1989ed1 (merge of PR #21, merged by Dominic after approval). Common Stage 9 SHA 280884d755caacd8679ddac78b1dab4accaa05ef
 Each assessed PG member's implementation, supervision and test contribution: Junaid wrote evidence file, created issue, re defined vague requirement, proposed prompt, revised the plan, approved the plan, reviewed the diff and tests, renamed the parameters, ran the three pytest commands. Copilot drafted the two methods and the test file.
-Optional UG help, acknowledged separately: none
+Optional UG help, acknowledged separately: Dominic (UG) acted as the independent PR reviewer and ran the integrated retest. This is unassessed UG help. All implementation, supervision and agent decisions are Junaid's.
 
 ## I Four reflections
 
@@ -353,10 +353,10 @@ Optional UG help, acknowledged separately: none
 - [X] Plan reviewed before bounded actions; every file and test diff inspected.
 - [X] Actual agent route, decisions, corrections and rechecks recorded honestly.
 - [X] No unrelated features, persistence, dependencies or staff solutions introduced.
-- [-] Another-member or tutor review and integrated retest complete.
+- [X] Another-member or tutor review and integrated retest complete.
 - [X] Tutorial, four reflections, ten formative responses and PG contributions complete.
 - [X] Each PG member can explain their code and supervision.
-- [-] README PG note, actual integrated SHA and limitations recorded.
+- [X] README PG note, actual integrated SHA and limitations recorded.
 
 Unresolved issues / owner / action: None
 Stage 11 handover references to extension, tests, dependencies and actual AI/review evidence: Rescheduling is in domain.py and services.py. Tests are tests/test_rescheduling.py. No new dependency. Copilot drafted the code and tests. Plan, diff and test review are in D to H of this file. Common Stage 9 SHA 280884d.
