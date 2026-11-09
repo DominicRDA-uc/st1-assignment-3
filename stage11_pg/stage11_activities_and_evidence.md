@@ -6,7 +6,7 @@ Blank student template. All Assignment 3 stage materials are provided from the b
 
 Group/tutorial: Wednesday 2.30 to 4.30, Group 2
 Assessed PG members and contributions: Junaid Sayani (junaidSayani1)
-Optional UG contributors: none for Stage 11 yet. Dominic reviewed Stage 10.
+Optional UG contributors: Adithi (adi-ii07) merged PR #23.
 
 ## A Handover and human-first scope
 
@@ -21,7 +21,7 @@ Scope, assumptions, exclusions and initial observations made BEFORE Copilot: Ses
 Confirmed Copilot mode / student entitlement / permissions / approval reference: Plan Mode - no permissions given pre-approved, every permission is checked on runtime.
 Plan-only → human approval → bounded editing check / approved equivalent route: Given in stage 10  Evidence File.
 Overview/revision 2 availability / source: used in earlier stages from the assignment package
-Assigned PG owner / independent reviewer: owner Junaid. Reviewer Dom.
+Assigned PG owner / independent reviewer: owner Junaid.  Reviewed and merged by Adithi (adi-ii07) on PR #23.
 
 ## B Original tutorial activities
 
@@ -116,7 +116,7 @@ For each of at least TWO new/materially strengthened tests, explain the earlier 
 | Previous PG independently | python -m pytest -q --ignore=tests/test_assurance.py in project/ | uncommitted on 04afa5d | 57 passed | terminal |
 | Common independently | python -m pytest -q --ignore=tests/test_assurance.py --ignore=tests/test_rescheduling.py in project/ | uncommitted on 04afa5d | 37 passed | terminal |
 | Full PG cumulative | python -m pytest -q in project/ | uncommitted on 04afa5d | 59 passed | terminal |
-| Integrated retest | [response] | [response] | [response] | [response] |
+| Integrated retest | python -m pytest -q in project/ | 030a647f5ece42b317f45b9d4149a7d3a3ab40da (main after PR #23) | 59 passed (Python 3.13.12, pytest 8.3.5) | Junaid retest on main after merge |
 
 Confirmed defect / minimal correction / before-after evidence, or justified no-change decision: no in-scope defect found, production code unchanged, the two tests kept
 Preserved earlier assertions / inspected test diff: only new file tests/test_assurance.py, no edits to older tests
@@ -140,7 +140,7 @@ Unresolved failures, action and owner: none.
 | TRUST element | Evidence | Status/action |
 |---|---|---|
 | Trace | issue #20, PR #21, SHA 1989ed1, this branch | Stage 10 path is in git |
-| Review | Stage 11 independent review not done | Wait for I |
+| Review | Adithi (adi-ii07) merged PR #23 into main at 030a647 | Independent of the PG author. Recorded in I |
 | Understand | Two stores do not share patients. Listing after reschedule is a new list | See test_assurance.py |
 | Secure | stdlib runtime, pytest for tests, no logging module, no secrets in smartcare/ | H |
 | Test | 59 passed, common 37 still pass | Green suite is not a security claim |
@@ -221,15 +221,15 @@ Policy questions or unresolved provenance / responsible contact: NA
 
 ## I Independent review and final audit statement
 
-Human reviewer / PR or diff link / feedback: Junaid
-Corrections and recheck / approval before integration: Whole test suites pass, the stage performs a compelte audit and does not invent anything.
+Human reviewer / PR or diff link / feedback: Adithi (adi-ii07) merged https://github.com/DominicRDA-uc/st1-assignment-3/pull/23 on 9 Nov 2026. Merge commit 030a647. No production-code change was requested. Junaid remains the PG owner of the tests and the audit record.
+Corrections and recheck / approval before integration: No code correction. Two assurance tests kept. python -m pytest -q in project/ on 030a647: 59 passed.
 Overall decision: Acceptable
 Unresolved risks: NA
-Evidence supporting decision: All tests pass, reassurance test strenghtens system integrity, copilot review reports no vulnerability.
-Remediation owner / action / status: Junaid
-Residual limitations and conditions of acceptance: NA
-Accountable reviewer and PG member sign-off: Junaid + Dominic
-Integrated PG SHA / protected common SHA: Stage 11 not merged yet. Latest PG code on main is 1989ed1 (PR #21). Protected Stage 9 SHA 280884d (PR #19)
+Evidence supporting decision: PR #23 on main. 59 passed after merge. Copilot audit in G found no confirmed defect. Production code unchanged in Stage 11.
+Remediation owner / action / status: Junaid. No further Stage 11 code action.
+Residual limitations and conditions of acceptance: Session-only store. Synthetic names. No lockfile. Full Copilot chats are not all in git.
+Accountable reviewer and PG member sign-off: Junaid (PG owner). Adithi (adi-ii07) merged PR #23.
+Integrated PG SHA / protected common SHA: Stage 11 SHA 030a647f5ece42b317f45b9d4149a7d3a3ab40da (PR #23). Protected Stage 9 SHA 280884d (PR #19). Stage 10 SHA 1989ed1 (PR #21).
 
 ## J Reflections
 
@@ -261,12 +261,12 @@ Integrated PG SHA / protected common SHA: Stage 11 not merged yet. Latest PG cod
 - [X] Earlier assertions preserved; common and PG suites independently checked.
 - [X] Copilot claims independently verified and actual decisions recorded honestly.
 - [X] Dependency/provenance/privacy review and residual limits complete.
-- [ ] Independent human review, integration and retest recorded.
+- [X] Independent human review, integration and retest recorded.
 - [X] All three reflections and ten formative questions answered.
 - [X] Accountable PG contribution/sign-off and protected UG pathway retained.
 
-Unresolved issues / owner / handover action: Independent review, PR into main, then merge SHA. Owner Junaid
-Tested code SHA / command / working directory / observed result: uncommitted on 04afa5d, python -m pytest -q in project/, 59 passed
-Final submitted SHA / later evidence-only change explanation: [after merge]
-Stage 12 handover links to same project/tests/assurance conclusion and limitations: same repo and tests. tests/test_assurance.py kept. No production change. Copilot audit in G, no confirmed defect. Independent review still open. Protected Stage 9 SHA 280884d. Stage 10 SHA 1989ed1.
+Unresolved issues / owner / handover action: None for Stage 11. Stage 12 is a separate PR and is not on main yet. Owner Junaid for PG handover.
+Tested code SHA / command / working directory / observed result: 030a647f5ece42b317f45b9d4149a7d3a3ab40da. python -m pytest -q in project/. 59 passed (Python 3.13.12, pytest 8.3.5).
+Final submitted SHA / later evidence-only change explanation: 030a647f5ece42b317f45b9d4149a7d3a3ab40da. This evidence update is after that merge and does not change production code.
+Stage 12 handover links to same project/tests/assurance conclusion and limitations: same repo and tests. tests/test_assurance.py kept. No production change. Copilot audit in G, no confirmed defect. PR #23 merged. Protected Stage 9 SHA 280884d. Stage 10 SHA 1989ed1. Stage 11 SHA 030a647.
 Begin Stage 12 after the previous applicable stage is integrated, verified and recorded. Its handout and blank record are already supplied.

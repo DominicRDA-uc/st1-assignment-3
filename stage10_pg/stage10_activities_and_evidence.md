@@ -360,5 +360,5 @@ Optional UG help, acknowledged separately: Dominic (UG) acted as the independent
 
 Unresolved issues / owner / action: None
 Stage 11 handover references to extension, tests, dependencies and actual AI/review evidence: Rescheduling is in domain.py and services.py. Tests are tests/test_rescheduling.py. No new dependency. Copilot drafted the code and tests. Plan, diff and test review are in D to H of this file. Common Stage 9 SHA 280884d.
-Submitted SHA / explanation if later than tested code: [response]
+Submitted SHA / explanation if later than tested code: Tested integrated code SHA 1989ed1 (merge of PR #21). Later Stage 10 evidence-only commits on main are 6d3cd8f and 04afa5d. Those did not change production code. Stage 11 merge 030a647 is after this stage.
 Stage 11 materials are supplied from the beginning. Begin Stage 11 only after Stage 10 has been integrated, verified and recorded. UG follows the protected common code from Stage 9 to Stage 12.

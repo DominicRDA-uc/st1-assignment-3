@@ -8,10 +8,10 @@ Baseline: Stage 6 foundation, 2026 revision 2. This starter deliberately leaves 
 - Group and tutorial: Wed 2.30-4.30 Group 2
 - Member names, GitHub usernames and UG/PG cohorts: Junaid Sayani (junaidSayani1)-PG, Dominic (DominicRDA-uc)-UG, Juliann (Jules-tryingtocode)-UG, Aditti-UG.
 - Shared repository URL: https://github.com/DominicRDA-uc/st1-assignment-3
-- Latest completed stage: Stage 10 (Stage 11 branch not merged yet)
-- Verified code SHA: 1989ed1 (merge of PR #21, Stage 10 rescheduling). Protected Stage 9 SHA 280884d (PR #19)
-- Test command, working directory and observed result: python -m pytest -q in project/ gave 57 passed on that Stage 10 code (Python 3.13.12, pytest 8.3.5). Common only, ignoring test_rescheduling.py, gave 37 passed
-- Final submitted SHA, if different from tested code SHA: origin/main is 04afa5d, Stage 10 evidence-only commits after 1989ed1.
+- Latest completed stage: Stage 11 (Stage 12 PR is not on main yet)
+- Verified code SHA: 030a647f5ece42b317f45b9d4149a7d3a3ab40da (merge of PR #23, Stage 11 assurance). Stage 10 SHA 1989ed1 (PR #21). Protected Stage 9 SHA 280884d (PR #19)
+- Test command, working directory and observed result: python -m pytest -q in project/ gave 59 passed on 030a647 (Python 3.13.12, pytest 8.3.5). Common only, ignoring test_rescheduling.py and test_assurance.py, gave 37 passed
+- Final submitted SHA, if different from tested code SHA: origin/main is 030a647. Stage 12 remains on a separate branch until that PR merges.
 
 Do not put student IDs, private peer ratings, credentials or personal contact details here.
 
