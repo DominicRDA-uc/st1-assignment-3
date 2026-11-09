@@ -6,7 +6,7 @@ Baseline: Stage 6 foundation, 2026 revision 2. This starter deliberately leaves 
 ## Group index
 
 - Group and tutorial: Wed 2.30-4.30 Group 2
-- Member names, GitHub usernames and UG/PG cohorts: Junaid Sayani (junaidSayani1)-PG, Dominic (DominicRDA-uc)-UG, Juliann (Jules-tryingtocode)-UG, Aditti-UG.
+- Member names, GitHub usernames and UG/PG cohorts: Junaid Sayani (junaidSayani1)-PG, Dominic (DominicRDA-uc)-UG, Juliann (Jules-tryingtocode)-UG, Adithi Rajeev (adi-ii07) – UG.
 - Shared repository URL: https://github.com/DominicRDA-uc/st1-assignment-3
 - Latest completed stage: Stage 11 (Stage 12 PR is not on main yet)
 - Verified code SHA: 030a647f5ece42b317f45b9d4149a7d3a3ab40da (merge of PR #23, Stage 11 assurance). Stage 10 SHA 1989ed1 (PR #21). Protected Stage 9 SHA 280884d (PR #19)
