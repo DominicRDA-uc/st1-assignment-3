@@ -149,6 +149,28 @@ class AppointmentService:
         appointment.cancel()
         return appointment
 
+    def reschedule_appointment(
+        self,
+        appointment_id: str,
+        new_date_time: datetime,
+    ) -> Appointment:
+        """Move a stored SCHEDULED appointment and return the same object.
+
+        Raise LookupError for an unknown ID and ValueError for invalid
+        values, illegal states or practitioner conflicts.
+        """
+        appointment = self.find_appointment(appointment_id)
+        if self.data_store.has_practitioner_conflict(
+            appointment.practitioner.practitioner_id,
+            new_date_time,
+            exclude_appointment_id=appointment.appointment_id,
+        ):
+            raise ValueError(
+                'Practitioner already has a SCHEDULED appointment at this time',
+            )
+        appointment.reschedule(new_date_time)
+        return appointment
+
     def list_practitioner_appointments(
         self,
         practitioner_id: str,
