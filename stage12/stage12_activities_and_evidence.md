@@ -2,183 +2,190 @@
 
 BLANK student response template. Supplied from the beginning in stage12/ in your EXISTING repository; complete it only when you reach Stage 12 after the previous applicable stage is integrated, verified and recorded; preserve project/, tests, earlier records and Git history. UG/common and PG/extended scope must be explicit. Use concise results and versioned links, not copied logs or source. No staff answers or fabricated approvals.
 
-Group/tutorial: [response]
-Members and UG/PG applicability: [response]
+Group/tutorial: Wednesday 2.30-4.30
+Members/cohorts: Junaid Sayani (junaidSayani1), Dominic (DominicRDA-uc), Julianne (Jules-tryingtocode), Adithi Rajeev (adi-ii07)
+Members and UG/PG applicability: Adithi Rajeev (adi-ii07) – UG; Dominic (DominicRDA-uc) – UG; Julianne (Jules-tryingtocode) – UG; Junaid Sayani (junaidSayani1) – PG. Common Stage 12 requirements apply to all members. Stage 10 and 11 PG requirements apply to Junaid only.
+
 
 
 ## A Release scope and starting SHA
 
-Release label/version and requirements baseline: [response]
-Common starting SHA / branch / applicable members: [response]
-PG starting SHA / branch / applicable members or not applicable: [response]
-Working-state review and approved integration: [response]
-Protected common candidate and PG differences: [response]
-Feature freeze / owner / verifier: [response]
+Release label/version and requirements baseline: SmartCare v1.0.0 (Stage 12 release candidate). Requirements baseline: SmartCare A3 Requirements Baseline 2026 Revision 2, covering common requirements and applicable PG extensions.
+Common starting SHA / branch / applicable members: 030a647f5eec42b317f45b9d4149a7d3a3ab40da / main (starting integration commit), Stage 12 working branch: docs/stage12-release. Applicable members: Adithi Rajeev (UG), Dominic (UG), Julianne (UG), and Junaid Sayani (PG). Common SmartCare requirements apply to all four members.
+PG starting SHA / branch / applicable members or not applicable: 030a647f5eec42b317f45b9d4149a7d3a3ab40da / main. Applicable PG member: Junaid Sayani (junaidSayani1). Stage 10 and Stage 11 PG changes have been integrated into the shared main branch through reviewed pull requests, including Stage 11 PR #23.
+Working-state review and approved integration: Stage 11 PR #23 was reviewed and approved by Adithi Rajeev (adi-ii07) and merged into main on 9 November 2026. The merge commit is 030a647. The latest integrated changes were downloaded using git pull --ff-only, and the Stage 12 working branch docs/stage12-release was created from the updated main branch. The initial working tree was clean.
+Protected common candidate and PG differences: The common Stage 9 functionality is the baseline for all four group members. Junaid's PG work adds rescheduling and assurance tests from Stages 10 and 11. The protected common Stage 9 checkpoint is identified in the earlier stage records. Both common and PG functionality are included in the current integrated candidate. We will run the full applicable test suite to confirm the PG changes have not broken the common functionality.
+Feature freeze / owner / verifier: Feature freeze began on 9 November 2026 during Stage 12 preparation. No optional features will be added after this point. Only genuine release-blocking problems will be corrected. Stage 12 preparation owner: Adithi Rajeev (adi-ii07). Independent release verifier: Junaid Sayani (junaidSayani1)
 
 
 ## B Requirements and release readiness matrix
 
-Tutorial activity 1: All tests pass, README setup is incomplete, one dependency is unreviewed and a known limitation is undocumented. Decide Release / Release with conditions / Do not release and justify: [response]
+Tutorial activity 1: All tests pass, README setup is incomplete, one dependency is unreviewed and a known limitation is undocumented. Decide Release / Release with conditions / Do not release and justify:Release with conditions. Although all tests pass, the incomplete README instructions, unreviewed dependency and undocumented limitation must be addressed before final approval. Passing tests alone does not confirm release readiness.
 
 Tutorial activity 2 and actual readiness matrix. Add exact requirement/acceptance IDs, evidence and reviewer; distinguish common/PG applicability.
 
 | Release claim / requirement / scope | Evidence | Location/link and SHA | Reviewer | Sufficient? | Gap/action |
 |---|---|---|---|---|---|
-| Cancellation history works | [response] | [response] | [response] | [response] | [response] |
-| Architecture responsibilities are appropriate | [response] | [response] | [response] | [response] | [response] |
-| Rescheduling is safe — PG only | [response] | [response] | [response] | [response] | [response] |
-| AI use is responsible — common recheck / PG assurance | [response] | [response] | [response] | [response] | [response] |
-| System is maintainable | [response] | [response] | [response] | [response] | [response] |
-| FR-01–03 register/find and validation | [response] | [response] | [response] | [response] | [response] |
-| FR-04–05 booking/conflict rules | [response] | [response] | [response] | [response] | [response] |
-| FR-06–08 cancellation/history/find | [response] | [response] | [response] | [response] | [response] |
-| FR-09 and QRY/FP listing/filter/order/purity | [response] | [response] | [response] | [response] | [response] |
-| UI full console sequence and error recovery | [response] | [response] | [response] | [response] | [response] |
-| Session-only scope / FR-10 retired | [response] | [response] | [response] | [response] | [response] |
-| PG RES and assurance integration | [response] | [response] | [response] | [response] | [response] |
-
+| Cancellation history works | FR-06/07: test_f8_02_cancelled_appointment_stays_findable and test_list_practitioner_appointments_shows_cancelled passed. | [Regression tests](https://github.com/DominicRDA-uc/st1-assignment-3/blob/030a647f5ece42b317f45b9d4149a7d3a3ab40da/project/tests/test_regressions.py); [Service tests](https://github.com/DominicRDA-uc/st1-assignment-3/blob/030a647f5ece42b317f45b9d4149a7d3a3ab40da/project/tests/test_services/appointment_service_test.py) | Adithi Rajeev - test run | Partly | Inspect assertions and confirm retained history in the console demonstration. |
+| Architecture responsibilities are appropriate | NFR-02/03: test_integrated_service_workflow passed. Domain, store, service, query and console responsibilities are identified in the requirements. | [Workflow tests](https://github.com/DominicRDA-uc/st1-assignment-3/blob/030a647f5ece42b317f45b9d4149a7d3a3ab40da/project/tests/test_workflows.py); project/smartcare/ | Adithi Rajeev - code review pending | Partly | Inspect source code for correct responsibility separation. |
+| Rescheduling is safe - PG only | PG RES-01-06: 20 tests in test_rescheduling.py passed, covering identity preservation, validation, conflicts and non-mutation on failure. | [PG rescheduling tests](https://github.com/DominicRDA-uc/st1-assignment-3/blob/030a647f5ece42b317f45b9d4149a7d3a3ab40da/project/tests/test_rescheduling.py); [Stage 10 evidence](https://github.com/DominicRDA-uc/st1-assignment-3/blob/030a647f5ece42b317f45b9d4149a7d3a3ab40da/stage10_pg/stage10_activities_and_evidence.md) | Adithi Rajeev - test run; PG evidence review pending | Partly | Confirm service behaviour, assertions and PG demonstration evidence. |
+| AI use is responsible - common recheck / PG assurance | Stage 10 Copilot-assisted rescheduling and Stage 11 VERIFY/TRUST records document human verification and Accept/Reject decisions. Stage 11 PR #23 was reviewed and approved. | [Stage 10](https://github.com/DominicRDA-uc/st1-assignment-3/blob/030a647f5ece42b317f45b9d4149a7d3a3ab40da/stage10_pg/stage10_activities_and_evidence.md); [Stage 11](https://github.com/DominicRDA-uc/st1-assignment-3/blob/030a647f5ece42b317f45b9d4149a7d3a3ab40da/stage11_pg/stage11_activities_and_evidence.md); [PR #23](https://github.com/DominicRDA-uc/st1-assignment-3/pull/23) | Adithi Rajeev - PR #23 reviewer | Partly | Complete final Stage 12 AI, privacy and dependency review in Section E. |
+| System is maintainable | NFR-03: 59 integrated tests passed. Project source, tests and READMEs are available for final maintainability inspection. | [Project README](https://github.com/DominicRDA-uc/st1-assignment-3/blob/030a647f5ece42b317f45b9d4149a7d3a3ab40da/project/README.md); project/smartcare/; project/tests/ | Adithi Rajeev - inspection pending | Partly | Check naming, duplication, documentation, dependencies and responsibilities. |
+| FR-01-03 register/find and validation | test_required_fields, test_registration_and_booking, patient lookup tests and practitioner lookup tests passed. | [Starter tests](https://github.com/DominicRDA-uc/st1-assignment-3/blob/030a647f5ece42b317f45b9d4149a7d3a3ab40da/project/tests/test_starter.py); [Patient tests](https://github.com/DominicRDA-uc/st1-assignment-3/blob/030a647f5ece42b317f45b9d4149a7d3a3ab40da/project/tests/test_services/patient_service_test.py); [Practitioner tests](https://github.com/DominicRDA-uc/st1-assignment-3/blob/030a647f5ece42b317f45b9d4149a7d3a3ab40da/project/tests/test_services/practitioner_service_test.py) | Adithi Rajeev - test run | Partly | Inspect assertions and demonstrate registration, lookup and invalid inputs. |
+| FR-04-05 booking/conflict rules | test_conflict_rule_and_different_practitioner and test_f8_01_same_practitioner_same_time_is_rejected passed. | [Starter tests](https://github.com/DominicRDA-uc/st1-assignment-3/blob/030a647f5ece42b317f45b9d4149a7d3a3ab40da/project/tests/test_starter.py); [Regression tests](https://github.com/DominicRDA-uc/st1-assignment-3/blob/030a647f5ece42b317f45b9d4149a7d3a3ab40da/project/tests/test_regressions.py) | Adithi Rajeev - test run | Partly | Verify assertions and demonstrate same-practitioner rejection and different-practitioner acceptance. |
+| FR-06-08 cancellation/history/find | Cancellation, invalid-transition, unknown-appointment and retained-history tests passed. | [Appointment service tests](https://github.com/DominicRDA-uc/st1-assignment-3/blob/030a647f5ece42b317f45b9d4149a7d3a3ab40da/project/tests/test_services/appointment_service_test.py); [Regression tests](https://github.com/DominicRDA-uc/st1-assignment-3/blob/030a647f5ece42b317f45b9d4149a7d3a3ab40da/project/tests/test_regressions.py) | Adithi Rajeev - test run | Partly | Demonstrate cancellation, retained history and rejection of repeated cancellation. |
+| FR-09 and QRY/FP listing/filter/order/purity | 11 tests in test_queries.py passed, covering practitioner selection, status filtering, ordering, distinct lists and reusable sort key. | [Query tests](https://github.com/DominicRDA-uc/st1-assignment-3/blob/030a647f5ece42b317f45b9d4149a7d3a3ab40da/project/tests/test_queries.py); [Appointment service tests](https://github.com/DominicRDA-uc/st1-assignment-3/blob/030a647f5ece42b317f45b9d4149a7d3a3ab40da/project/tests/test_services/appointment_service_test.py) | Adithi Rajeev - test run | Partly | Check assertions, query purity and console listing/filter demonstration. |
+| UI full console sequence and error recovery | test_UI_01_menu_workflow, test_UI_02_menu_recovers_from_invalid_input and test_integrated_service_workflow passed. | [Workflow tests](https://github.com/DominicRDA-uc/st1-assignment-3/blob/030a647f5ece42b317f45b9d4149a7d3a3ab40da/project/tests/test_workflows.py) | Adithi Rajeev - test run | Partly | Run and record a fresh interactive demonstration including invalid inputs. |
+| Session-only scope / FR-10 retired | Revision 2 retires FR-10 persistence. Current-session storage is the required scope; README and code checks are still needed. | [Project README](https://github.com/DominicRDA-uc/st1-assignment-3/blob/030a647f5ece42b317f45b9d4149a7d3a3ab40da/project/README.md); project/smartcare/ | Adithi Rajeev - inspection pending | Partly | Confirm README states session-only behaviour and inspect code for unintended persistence. |
+| PG RES and assurance integration | 20 PG rescheduling tests and 2 assurance tests passed in the 59-test integrated run. Stage 10/11 evidence records and PRs are available. | [Rescheduling tests](https://github.com/DominicRDA-uc/st1-assignment-3/blob/030a647f5ece42b317f45b9d4149a7d3a3ab40da/project/tests/test_rescheduling.py); [Assurance tests](https://github.com/DominicRDA-uc/st1-assignment-3/blob/030a647f5ece42b317f45b9d4149a7d3a3ab40da/project/tests/test_assurance.py); [PR #23](https://github.com/DominicRDA-uc/st1-assignment-3/pull/23) | Adithi Rajeev - test run; PG review pending | Partly | Inspect PG assertions and assurance findings, and obtain final independent verification. |
 
 ## C Full regression results
 
 | Suite/scope | Environment/version | Working directory and command | Tested SHA | Actual result | Evidence link |
 |---|---|---|---|---|---|
-| Complete common | [response] | [response] | [response] | [response] | [response] |
-| Complete PG if applicable | [response] | [response] | [response] | [response] | [response] |
-| Affected focused checks after correction | [response] | [response] | [response] | [response] | [response] |
-| Full integrated recheck | [response] | [response] | [response] | [response] | [response] |
-Prior assertions preserved / reviewed test diff: [response]
-Remaining failure / limitation: [response]
+| Complete common / full integrated suite | macOS; Python 3.14.3; pytest 8.3.5 | project/; python -m pytest -q | 030a647f5ece42b317f45b9d4149a7d3a3ab40da | 59 passed in 0.08s (full integrated suite, including PG tests; common scope not separately isolated) | Pending — link to committed Stage 12 regression evidence or PR comment recording this result |
+| Complete PG if applicable | macOS; Python 3.14.3; pytest 8.3.5 | project/; PG tests included in python -m pytest -q; separate PG-only run pending | 030a647f5ece42b317f45b9d4149a7d3a3ab40da | PG rescheduling and assurance tests included in the 59 passing tests; separate PG-only result not yet recorded | [Rescheduling tests](https://github.com/DominicRDA-uc/st1-assignment-3/blob/030a647f5ece42b317f45b9d4149a7d3a3ab40da/project/tests/test_rescheduling.py); [Assurance tests](https://github.com/DominicRDA-uc/st1-assignment-3/blob/030a647f5ece42b317f45b9d4149a7d3a3ab40da/project/tests/test_assurance.py) |
+| Affected focused checks after correction | Not applicable so far — no Stage 12 correction recorded | Run focused pytest command only if a release correction is required | Pending if correction occurs | No Stage 12 corrective test run required yet | Pending — link corrective PR and test evidence if applicable |
+| Full integrated recheck | Pending final integration | project/; python -m pytest -q after approved final changes | Pending final tested SHA | Pending — final recheck not yet performed | Pending — final Stage 12 PR / test evidence |
+Prior assertions preserved / reviewed test diff: The full integrated suite passed all 59 tests at the starting SHA. Preservation of earlier test assertions still requires a Git diff review against the protected common checkpoint, with the result and reviewer to be recorded.
+Remaining failure / limitation: No failures or skipped tests were reported in the 59-test integrated run. Final fresh-copy verification, independent review and final integrated recheck remain outstanding.
 
 
 ## D Console and end to end demonstration
 
-| Demo step | Synthetic setup/input | Expected requirement | Observed result | Evidence/link |
-|---|---|---|---|---|
-| Problem and stakeholders | [response] | [response] | [response] | [response] |
-| Register and find Patient and two Practitioners | [response] | [response] | [response] | [response] |
-| Valid booking | [response] | [response] | [response] | [response] |
-| Same practitioner exact-time conflict rejected | [response] | [response] | [response] | [response] |
-| Different practitioner same time allowed | [response] | [response] | [response] | [response] |
-| Cancel SCHEDULED and retain/find CANCELLED object | [response] | [response] | [response] | [response] |
-| Invalid/repeated cancellation rejected | [response] | [response] | [response] | [response] |
-| Default all-status listing | [response] | [response] | [response] | [response] |
-| Explicit filtering / empty vs unknown / deterministic order | [response] | [response] | [response] | [response] |
-| Invalid date/status/menu/lookup recovery and continued operation | [response] | [response] | [response] | [response] |
-| Session-only limitation and normal exit | [response] | [response] | [response] | [response] |
-| One meaningful requirement-linked pytest test explained | [response] | [response] | [response] | [response] |
-| Architecture and one actual AI decision / known limitation | [response] | [response] | [response] | [response] |
-| PG reschedule identity/participants/time and no-op | [response] | [response] | [response] | [response] |
-| PG conflict/invalid status/failure non-mutation | [response] | [response] | [response] | [response] |
-| PG old slot / current lookup/list ordering / assurance risks | [response] | [response] | [response] | [response] |
-Stable demo owner / fresh process / command: [response]
-PG demonstrations through service/tests or not applicable: [response]
+| Demonstration step / requirement | Input or action | Observed result | Evidence link / location |
+|---|---|---|---|
+| Problem and stakeholders | Explain SmartCare's purpose and identify patients, practitioners and clinic staff. | SmartCare is a console-based system for managing patient, practitioner and appointment information. Stakeholder explanation prepared; oral explanation pending. | project/README.md; stage09/stage09_activities_and_evidence.md |
+| Register and find patient — FR-01/02 | Register a patient, search by valid ID and try an unknown or invalid ID. | Patient P001 (Alex Sample) was used successfully in appointment operations. Direct patient registration and lookup demonstration pending. Relevant automated tests passed. | project/tests/test_starter.py; project/tests/test_services/patient_service_test.py |
+| Register and find practitioners — FR-03 | Register two practitioners, find them by ID and try an invalid or unknown ID. | Practitioners D001 (Dr Test One) and D002 (Dr Test Two) were recognised in appointment operations. Direct registration and lookup demonstrations pending. Relevant automated tests passed. | project/tests/test_starter.py; project/tests/test_services/practitioner_service_test.py |
+| Valid booking and conflicts — FR-04/05 | Book A002 for P001 and D001 at 09:00. Attempt A006 for D001 at 10:00 when A004 is already scheduled. Search for A006 afterwards. | A002 was booked successfully. Duplicate ID A001 was rejected. A006 was rejected because D001 already had a scheduled appointment at 10:00. Searching A006 returned "Appointment not found", confirming no partial booking. A003 was found with D002 at 09:00; simultaneous scheduled bookings with different practitioners still require direct verification. | project/tests/test_starter.py; project/tests/test_regressions.py; interactive console observations |
+| Cancellation and retained history — FR-06/07/08 | Cancel A002, retrieve it by ID, cancel it again and attempt cancellation of A999. | A002 was cancelled successfully and remained retrievable with its original ID, patient, practitioner and date/time. Status changed to CANCELLED. Repeated cancellation returned "Only SCHEDULED appointments may be cancelled". Unknown ID A999 returned "Appointment not found". The console continued without crashing. | project/tests/test_regressions.py; project/tests/test_services/appointment_service_test.py; interactive console observations |
+| Practitioner listing and queries — FR-09, QRY/FP | List D001 appointments using scheduled, cancelled and blank filters. Test invalid status, unknown practitioner and ordering. | Unfiltered listing returned A001 and A002 at 09:00, A004 at 10:00 and A005 at 11:00, in ascending date/time then ID order. Both CANCELLED and SCHEDULED records appeared. A003 belonging to D002 was excluded. Status filters worked, invalid status was rejected, empty results were handled, and D999 returned "Practitioner not found". | project/tests/test_queries.py; project/tests/test_services/appointment_service_test.py; interactive console observations |
+| Console error recovery — UI | Enter invalid menu option 99, invalid date 2026-99-99 10:00, invalid status pending and unknown IDs. | Option 99 returned "Unknown choice. Choose a number from 0 to 8." Invalid date returned "Invalid calendar date/time; use YYYY-MM-DD HH:MM". Invalid status pending and unknown IDs were rejected. The program remained usable without crashing. | project/tests/test_workflows.py; interactive console observations |
+| Normal exit and session-only scope | Select option 0 to exit the program. | SmartCare exited normally and displayed "Goodbye. Session data discarded." This confirms the session-only notice. No restart-storage test was performed because persistence is outside the requirements. | project/README.md; interactive console exit observation |
+| Explain a meaningful pytest test | Explain test_f8_02_cancelled_appointment_stays_findable and FR-07. | The test passed as part of the 59-test integrated suite. Manual testing confirmed A002 remained retrievable after cancellation. Exact test assertions still require inspection before the final explanation. | project/tests/test_regressions.py |
+| Architecture and responsible-AI decision | Explain domain, store, service, query and console responsibilities and one real Copilot decision. | Stage 11 PR #23 was reviewed, approved and merged. Stage 11 evidence includes human review and rejection of unnecessary AI suggestions. Final architecture and specific AI decision explanations remain pending. | project/smartcare/; stage10_pg/; stage11_pg/; GitHub PR #23 |
+| PG rescheduling — RES-01–06 | Explain or demonstrate PG rescheduling, identity preservation, validation, conflicts and unchanged state on failure. | All 20 rescheduling tests and 2 assurance tests passed in the integrated 59-test run. Separate PG explanation or demonstration remains pending and applies to Junaid. | project/tests/test_rescheduling.py; project/tests/test_assurance.py; Stage 10/11 evidence |
+Stable demo owner / fresh process / command:Demonstration owner: Adithi Rajeev (adi-ii07). Environment: macOS, Python 3.14.3. Working directory: project/. Starting command: python main.py --interactive. Manual demonstration results and evidence are pending.
+PG demonstrations through service/tests or not applicable: Selected test: test_f8_02_cancelled_appointment_stays_findable in project/tests/test_regressions.py.
+
+This test relates to FR-07, which requires cancelled appointments to remain retrievable. The test passed in the integrated regression run. Its exact assertions will be reviewed before the final demonstration explanation. A passing test does not prove the entire application works in every possible situation.
 
 
 ## E Final code quality and AI review
 
 | Review area | Code/evidence location | Finding or no finding | Correction/no change and recheck |
 |---|---|---|---|
-| OOP responsibilities and pure-query boundaries | [response] | [response] | [response] |
-| PascalCase and snake_case naming | [response] | [response] | [response] |
-| Useful type hints and meaningful docstrings | [response] | [response] | [response] |
-| Four-space indentation and imports/layout | [response] | [response] | [response] |
-| Focused methods / duplication / dead or commented code | [response] | [response] | [response] |
-| Globals / leakage / unnecessary inheritance or frameworks | [response] | [response] | [response] |
-| No SQLite/persistence/repository ABCs/speculative features | [response] | [response] | [response] |
-| Synthetic data / secrets / dependencies / provenance | [response] | [response] | [response] |
-| Significant common Copilot contributions and human verification | [response] | [response] | [response] |
-| PG plan/diff/test approvals and Stage 11 VERIFY/TRUST | [response] | [response] | [response] |
+| OOP responsibilities and pure-query boundaries | project/smartcare/domain.py; data_store.py; services.py; queries.py; console.py | Modules are separated by responsibility; detailed source review pending. | No correction made; inspect boundaries before final release. |
+| PascalCase and snake_case naming | project/smartcare/ | Naming consistency not fully inspected. | Review class and function names before sign-off. |
+| Useful type hints and meaningful docstrings | project/smartcare/ | Detailed documentation review pending. | Correct only confirmed issues. |
+| Four-space indentation and imports/layout | project/smartcare/ | Formatting review pending. | No cosmetic changes made without evidence. |
+| Focused methods / duplication / dead or commented code | project/smartcare/ | Detailed duplication and dead-code review pending. | Inspect before final release. |
+| Globals / leakage / unnecessary inheritance or frameworks | project/smartcare/ | Shared session-store design is documented; implementation review pending. | Review for inappropriate globals and leakage. |
+| No SQLite/persistence/repository ABCs/speculative features | project/smartcare/; project/README.md | Session-only behaviour observed at console exit; source inspection pending. | Confirm no persistence implementation was introduced. |
+| Synthetic data / secrets / dependencies / provenance | project/tests/; project/requirements-dev.txt; .gitignore | Synthetic patient and practitioner data observed during testing; full dependency and secret review pending. | Inspect tracked files and dependency origins. |
+| Significant common Copilot contributions | stage06/ through stage09/ evidence records | Earlier stages contain Copilot review evidence. Final comparison pending. | Verify recorded decisions against final changes. |
+| PG plan/diff/test approvals and Stage 11 assurance | stage10_pg/; stage11_pg/; PR #21; PR #23 | PR #23 reviewed and approved; 59 integrated tests passed including PG tests. | Final PG evidence and residual-risk review pending. |
 
 | AI claim | Affected requirement/code | Human check | Accept/Modify/Reject and reason | Actual outcome/action or no change |
 |---|---|---|---|---|
-| [response] | [response] | [response] | [response] | [response] |
-Access route or approved equivalent / limitations: [response]
-Available AI evidence and missing evidence honestly disclosed: [response]
+| Stage 11 AI review reported no confirmed exploitable vulnerability. Additional AI suggestions involved changing menu behaviour and adding a dependency. | Stage 11 VERIFY/TRUST assurance; project/smartcare/; dependency and console review. | Stage 11 records document human checks of AI suggestions. PR #23 was reviewed and approved by Adithi Rajeev. The integrated suite subsequently passed 59 tests at SHA 030a647f5ece42b317f45b9d4149a7d3a3ab40da. | Accept the limited no-confirmed-vulnerability finding, not a claim of complete security. Reject unnecessary menu changes and unsupported dependency additions. | Stage 11 records a justified no-finding outcome and rejection of unsupported suggestions. Final Stage 12 source, dependency and privacy inspection remains pending. |
+Access route or approved equivalent / limitations:Stage 10 and 11 evidence records describe the Copilot-assisted workflow and human approval process. The Stage 11 record notes that Copilot Plan Mode was used and permissions were checked at runtime. Final confirmation against the teaching team's approved access arrangements remains pending.
+Available AI evidence and missing evidence honestly disclosed: Available evidence includes the Stage 10 Copilot planning and implementation record, Stage 11 VERIFY/TRUST review, PR #21 and PR #23, and the passing integrated regression tests. Complete AI conversation transcripts are not available in the repository. Final code and dependency checks remain outstanding and will not be represented as completed until verified.
 
 
 ## F README and reproducibility check
 
 | README item | Location | Verifier | Result/gap |
 |---|---|---|---|
-| Purpose and included common/PG scope | [response] | [response] | [response] |
-| Out-of-scope capabilities and known limitations | [response] | [response] | [response] |
-| Confirmed teaching Python version and dependency installation | [response] | [response] | [response] |
-| Working directory / demo / interactive / test commands | [response] | [response] | [response] |
-| Repository structure and architecture responsibilities | [response] | [response] | [response] |
-| Responsible AI summary / synthetic-data rule | [response] | [response] | [response] |
-| Release label/version and SHA links | [response] | [response] | [response] |
-Root README index and project/README verified: [response]
-Fresh clone or extracted ZIP / candidate identity: [response]
-Verifier and clean environment / actual version: [response]
-Setup/run/test commands and observed results: [response]
-Missing local file or setup gap / remedy and recheck: [response]
+| Purpose and included common/PG scope | project/README.md | Adithi Rajeev (document review) | SmartCare purpose, common patient/practitioner/appointment features, and PG rescheduling are described. Root README still needs checking. |
+| Out-of-scope capabilities and known limitations | project/README.md | Adithi Rajeev (document review) | Session-only records and retired FR-10 persistence are documented. Other production limitations such as authentication, notifications and scalability need fuller documentation. |
+| Confirmed teaching Python version and dependency installation | project/README.md; project/requirements-dev.txt | Adithi Rajeev (local test) | README states Python 3.13 and pytest 8.3.5. Local test used Python 3.14.3 and pytest 8.3.5 with 59 passing tests. Teaching-team approved Python version requires confirmation. |
+| Working directory / demo / interactive / test commands | project/README.md | Adithi Rajeev (local testing) | Instructions include python main.py, python main.py --interactive and python -m pytest -q from project/. Interactive menu and pytest run verified locally. Demo command python main.py still requires separate confirmation. |
+| Repository structure and architecture responsibilities | project/README.md; project/smartcare/ | Adithi Rajeev (document review) | README describes domain.py, data_store.py, services and shared storage. Pure-query and console responsibilities need clearer documentation. |
+| Responsible AI summary / synthetic-data rule | project/README.md; stage10_pg/; stage11_pg/ | Adithi Rajeev (document review) | Synthetic-data requirement is documented. Significant AI use and human verification need a summary in the README. |
+| Release label/version and SHA links | Root README.md; project/README.md | Adithi Rajeev (document review) | Requirements baseline is stated, but v1.0 release label and immutable tested/submitted SHA links are not yet verified in the README files. |
+Root README index and project/README verified: The project README has been inspected and includes setup commands, common functionality, PG rescheduling, session-only storage, development dependencies and architecture information. The root README still requires final verification, and some release documentation gaps remain.
+Fresh clone or extracted ZIP / candidate identity: Fresh-copy verification has not yet been completed. The current Stage 12 starting candidate is 030a647f5ece42b317f45b9d4149a7d3a3ab40da. An independent verifier must test the final candidate from a fresh clone or extracted source ZIP.
+Verifier and clean environment / actual version: Local tester: Adithi Rajeev (adi-ii07). Local environment: macOS, Python 3.14.3 and pytest 8.3.5. Independent fresh-copy verifier and approved environment confirmation are pending.
+Setup/run/test commands and observed results: Working directory: project/. The interactive console was run using python main.py --interactive and manually demonstrated booking, cancellation, listing, error recovery and normal exit. The complete integrated suite was run using python -m pytest -q and returned 59 passed in 0.08 seconds. Installation and non-interactive demonstration in a fresh environment remain to be verified.
+Missing local file or setup gap / remedy and recheck: No missing local source file was identified during the successful test run. Documentation gaps remain concerning the teaching Python environment, release identifiers, responsible AI summary and broader known limitations. These must be reviewed and corrected before final reproducibility approval.
 
 
 ## G Known limitations debt and release notes
 
-Delivered features: [response]
-Important fixes: [response]
-Architecture/quality improvements: [response]
-Known limitations: [response]
-AI-assisted development note: [response]
+Delivered features: SmartCare supports patient and practitioner registration and lookup, appointment booking, conflict prevention, cancellation with retained history, appointment lookup, and filtered and sorted practitioner appointment listings. The console supports user input and error recovery. The PG extension adds rescheduling and Stage 11 assurance tests.
+Important fixes: Stage 8 corrected F8-01, where the practitioner conflict comparison used the wrong operator, and F8-02, where cancelled appointments were excluded from lookup. Stage 11 added two assurance tests. The integrated suite passed 59 tests on 9 November 2026.
+Architecture/quality improvements: The project separates domain entities and rules, session storage, services, queries and console interaction. Earlier stages added focused regression, workflow, query, rescheduling and assurance tests. Final maintainability inspection remains pending.
+Known limitations: SmartCare uses session-only storage with no database persistence. It has no production authentication, clinical features, notifications or billing. Datetimes are local and minute-precision, without timezone management, duration-overlap or clinic-hours rules. PG rescheduling has no console command.
+AI-assisted development note: The Stage 10 records document Copilot-assisted PG rescheduling work. Stage 11 documents human review of AI claims, acceptance of limited supported findings and rejection of unnecessary changes and dependencies. PR #23 was reviewed and approved. Final Stage 12 AI and dependency review remains pending.
 
 | Debt item | Impact | Priority | Future action | Accepted? / release rationale |
 |---|---|---|---|---|
-| [response] | [response] | [response] | [response] | [response] |
-Session-only synthetic data and minute-precision local time: [response]
-Production auth/roles, portal, notifications, billing/insurance, clinical AI exclusions: [response]
-Scale/concurrency, timezone policy, operations/monitoring, accessibility/usability limitations: [response]
-Difference between accepted scope limit and unresolved required behaviour: [response]
-PG assurance residual risks / owner / status or not applicable: [response]
+| README environment and release documentation inconsistencies | Setup and release identity may be unclear to reviewers | High | Confirm teaching Python version, correct documentation, and record final tested and submitted SHAs | Not yet accepted; resolve before final release decision |
+| Final independent fresh-copy verification outstanding | Reproducibility on another environment has not been established | High | Have another member run setup, demo and tests from a fresh clone or ZIP | Not yet accepted; final sign-off pending |
+| Code documentation and maintainability review incomplete | Possible maintainability issues remain unassessed | Medium | Complete source review and correct confirmed defects only | Pending assessment; not assumed to be defect-free |
+| Session-only storage and lack of production services | Records are lost on exit; real clinical deployment is unsupported | Scope limitation | Document session-only operation and excluded production capabilities | Intended course scope; no persistence implementation required |
+| Local naive datetimes at minute precision | No timezone or duration-overlap handling | Scope limitation | Document the accepted datetime contract; consider enhancements outside this assignment | Intended requirements boundary, not a release defect |
+Session-only synthetic data and minute-precision local time: SmartCare uses synthetic patient and practitioner information only. Records are kept in memory for the current session and discarded when the application exits. Datetimes use local naive values at minute precision. These are documented requirements boundaries.
+Production auth/roles, portal, notifications, billing/insurance, clinical AI exclusions: SmartCare does not implement production authentication, user roles, patient portals, notifications, billing, insurance processing or clinical AI. These capabilities are outside the approved course scope and would require separate design, security and validation work.
+Scale/concurrency, timezone policy, operations/monitoring, accessibility/usability limitations: The project does not claim production-scale concurrency, timezone handling, operational monitoring or comprehensive accessibility and usability validation. These limitations are outside the course-scale release scope and must not be confused with missing mandatory SmartCare requirements.
+Difference between accepted scope limit and unresolved required behaviour: An accepted scope limitation is functionality explicitly excluded by Revision 2, such as between-session persistence. An unresolved required behaviour is an applicable requirement that has not been demonstrated or sufficiently verified. The 59 automated tests passed, but remaining release documentation, independent reproducibility and review checks must be resolved before final approval.
+PG assurance residual risks / owner / status or not applicable: PG functionality applies to Junaid Sayani. The 20 rescheduling tests and 2 assurance tests passed within the 59-test integrated run. Stage 11 PR #23 was approved and merged. Residual risks include incomplete final independent verification and dependency/privacy review. PG owner: Junaid Sayani; final release verification pending.
 
 
 ## H Release findings and corrective action
 
-| Requirement/claim | Reproduction/observation | Impact/severity | Owner/action | Corrective diff | Focused/full recheck | Residual limit |
-|---|---|---|---|---|---|---|
-| [response] | [response] | [response] | [response] | [response] | [response] | [response] |
-Justified no-change conclusion if no defect found: [response]
-Release blockers still open / status: [response]
+| Requirement/claim | Reproduction/observation | Impact/severity | Owner/action | Corrective decision | Recheck/evidence |
+|---|---|---|---|---|---|
+| FR-04/05 booking and conflict | Booking A006 for D001 at 10:00 was rejected because A004 already occupied that time. Searching for A006 returned Appointment not found. | No confirmed defect; expected behaviour | Adithi Rajeev — manual test | No code change justified by observed result. | Console demonstration; 59 tests passed. |
+| FR-06/07/08 cancellation and history | A002 was cancelled and remained retrievable. Repeated cancellation and unknown ID A999 were rejected. | No confirmed defect; expected behaviour | Adithi Rajeev — manual test | No code change justified by observed result. | Console demonstration; test_regressions.py; 59 tests passed. |
+| FR-09 and QRY appointment listing | D001 listing returned A001, A002, A004 and A005 in time/ID order. Filtering and unknown practitioner handling worked. | No confirmed defect; expected behaviour | Adithi Rajeev — manual test | No code change justified by observed result. | Console demonstration; test_queries.py; 59 tests passed. |
+| UI-02 error recovery | Invalid menu option 99, invalid status pending and invalid date 2026-99-99 10:00 were rejected without crashing. | No confirmed defect; expected behaviour | Adithi Rajeev — manual test | No code change justified by observed result. | Console demonstration; test_workflows.py; 59 tests passed. |
+| README release documentation | Root README contained outdated Stage 10 information and incorrect member name. Local test environment was Python 3.14.3, while README states teaching baseline 3.13. | Documentation issue; medium | Adithi Rajeev — documentation update | README corrections prepared; final saved diff and environment confirmation pending. | Root README; project/README.md; final diff review pending. |
+| Final independent reproducibility | Local integrated suite passed, but no independent fresh-copy verification is recorded. | Release assurance gap; high | Independent verifier — fresh-copy setup and tests | Final release approval must remain pending until verified. | Section F; independent evidence pending. |
+Justified no-change conclusion if no defect found: No new application defect was confirmed during the completed Stage 12 checks. All 59 automated tests passed, and the manual console tests demonstrated correct booking, scheduling conflict rejection, cancellation, retained history, practitioner filtering, ordering and error recovery. Therefore, no production code change is currently justified based on these observations. This conclusion is limited to the checks performed; final code quality and independent verification remain outstanding.
+Release blockers still open / status:The remaining release blockers are final README and environment verification, completion of the code quality and responsible-AI review, independent fresh-copy reproducibility testing, and final human release approval. No application failure was confirmed in the completed tests. These assurance items remain open and must be resolved before declaring the final candidate ready for release.
 
 
 ## I Git review and integration evidence
 
-Issue / PR / diff links and reviewed SHA: [response]
-Independent reviewer / feedback / response: [response]
-Integration commit / full recheck: [response]
-Tracked and untracked file inspection / cleanliness: [response]
-Secrets/staff material/caches/tool-metadata exclusion check: [response]
-Candidate recovery plan / known-good SHA: [response]
-Named substantive contributions: [response]
+Issue / PR / diff links and reviewed SHA: Repository: https://github.com/DominicRDA-uc/st1-assignment-3. Stage 9 common integration: PR #19, SHA 280884d755caacd8679ddac78b1dab4accaa05ef. Stage 10 PG integration: PR #21, SHA 1989ed1ad3e5510af7c44441166c43a52046007e. Stage 11 assurance: PR #23, SHA 030a647f5ece42b317f45b9d4149a7d3a3ab40da. Stage 12 branch: docs/stage12-release. Stage 12 PR and reviewed diff are pending.
+Independent reviewer / feedback / response: Stage 11 PR #23 was reviewed and approved by Adithi Rajeev (adi-ii07), then merged into main. Stage 12 independent reviewer is not yet confirmed. Feedback and any corrections must be recorded after review; Stage 11 approval does not replace Stage 12 independent verification.
+Integration commit / full recheck:Stage 11 was integrated into main at SHA 030a647f5ece42b317f45b9d4149a7d3a3ab40da. Starting from this commit, the integrated suite was run in project/ using python -m pytest -q, returning 59 passed in 0.08s. The Stage 12 final integration commit and post-integration recheck are pending.
+Tracked and untracked file inspection / cleanliness: Stage 12 work is being prepared on docs/stage12-release. The temporary stage12_test_list.txt was generated for test discovery and must be excluded from the final commit. Final git status, git diff --check, tracked-file inspection and clean working-tree verification have not yet been completed.
+Secrets/staff material/caches/tool-metadata exclusion check: The final source submission must exclude .git, .venv, caches, credentials, real patient records, staff materials, peer forms, QA renders and Stage 8 recovery/tool assets. The current .gitignore and tracked files still require final inspection. No claim of a completed secrets scan is made.
+Candidate recovery plan / known-good SHA:Known-good starting SHA: 030a647f5ece42b317f45b9d4149a7d3a3ab40da. Protected common Stage 9 SHA: 280884d755caacd8679ddac78b1dab4accaa05ef. If Stage 12 documentation or integration causes a problem, retain the existing Git history, inspect the diff and recover the affected files from a known-good commit without overwriting other team members' work.
+Named substantive contributions: Junaid Sayani (PG) contributed Stage 11 assurance and PG evidence, as recorded in PR #23. Dominic contributed earlier integration and PG review work, as recorded in the Stage 10 history. Adithi Rajeev reviewed and approved PR #23, merged Stage 11 and performed the Stage 12 local regression run, manual console demonstrations and release documentation preparation. Julianne's exact contribution should be confirmed from the group's earlier records before finalising this field.
 
 
 ## J Human release decision
 
-Decision — READY FOR COURSE RELEASE / READY WITH DOCUMENTED LIMITATIONS / NOT YET READY: [response]
-Approver / date / rationale and evidence: [response]
-What risks remain / conditions / owners: [response]
-Can the team explain the system: [response]
-Can a change be recovered: [response]
-Common decision / PG decision where different: [response]
+Decision — READY FOR COURSE RELEASE / READY WITH DOCUMENTED LIMITATIONS / NOT YET READY: NOT YET READY — The integrated suite passed all 59 tests and the main console workflows were demonstrated successfully. However, independent fresh-copy verification, final release documentation checks and human approval are still pending.
+Approver / date / rationale and evidence: Approver: Pending final independent approval. Prepared by Adithi Rajeev (adi-ii07) on 9 November 2026. Evidence includes 59 passed tests in 0.08s, Stage 11 PR #23 approval and merge, manual console demonstrations, and Stage 12 release records. This is a provisional assessment, not a final group approval.
+What risks remain / conditions / owners: Outstanding conditions include completing README and code quality checks, confirming the approved Python environment, reviewing dependencies and excluded files, independently reproducing the final candidate, and recording the final tested and submitted SHAs. Adithi Rajeev is preparing the Stage 12 documentation; independent verification and final release approval require confirmation from the group.
+Can the team explain the system: Partly verified. The project documentation identifies domain models, shared session storage, services, pure queries and the console interface. The manual demonstration covered booking, conflict rejection, cancellation, retained history, listing, ordering, error recovery and exit. A complete team viva with substantive responses from every member has not yet been recorded.
+Can a change be recovered: Git history identifies the known-good Stage 11 integration SHA 030a647f5ece42b317f45b9d4149a7d3a3ab40da and protected Stage 9 common SHA 280884d755caacd8679ddac78b1dab4accaa05ef. The team can inspect diffs and recover affected files or commits using Git history. An actual recovery exercise has not been demonstrated.
+Common decision / PG decision where different:Common scope: NOT YET READY pending independent fresh-copy verification and final release approval. PG extension: NOT YET READY pending final PG assurance review and release verification. The 20 PG rescheduling tests and 2 assurance tests passed within the integrated 59-test run. PG responsibility applies to Junaid Sayani.
 
 
 ## K Final tested release SHA
 
-Exact common tested SHA: [response]
-Exact PG tested SHA or not applicable: [response]
-Final submitted SHA / repository URL: [response]
-Evidence-only later commit and difference explanation: [response]
-Executable changes after testing and re-verification: [response]
-Source ZIP name / SHA correspondence / extracted comparison: [response]
+Exact common tested SHA:030a647f5ece42b317f45b9d4149a7d3a3ab40da — Stage 11 integrated starting commit. The full integrated suite passed 59 tests in 0.08s using macOS, Python 3.14.3 and pytest 8.3.5. Final Stage 12 common tested SHA pending.
+Exact PG tested SHA or not applicable: PG applicable to Junaid Sayani. The integrated starting SHA was 030a647f5ece42b317f45b9d4149a7d3a3ab40da, containing PG rescheduling and Stage 11 assurance. All 20 rescheduling tests and 2 assurance tests passed within the 59-test run. Final PG tested SHA pending.
+Final submitted SHA / repository URL: Repository: https://github.com/DominicRDA-uc/st1-assignment-3. Stage 12 branch: docs/stage12-release. Final submitted SHA pending Stage 12 commit, integration and submission verification.
+Evidence-only later commit and difference explanation: No later Stage 12 evidence-only commit has been confirmed yet. The current starting SHA matches the integrated Stage 11 main branch. Any later documentation-only commits must be identified and their differences from the tested code SHA explained using the Git diff.
+Executable changes after testing and re-verification: No executable source changes have been reported during the Stage 12 documentation work so far. Final Git diff inspection is required to confirm this. If executable files or tests are changed, rerun the full applicable regression suite and record the new tested SHA before release.
+Source ZIP name / SHA correspondence / extracted comparison: Final source ZIP has not yet been created or independently checked. The submission must use the exact approved final source commit. After creating the ZIP, extract it into a clean directory and compare its contents with the final repository candidate, excluding prohibited files.
 
 
 ## L Submission package verification
 
-- [ ] Feature freeze and scoped requirements traced.
+- [x] Feature freeze and scoped requirements traced.
 - [ ] Applicable full regressions, integrated demo and invalid paths verified.
 - [ ] Architecture/code quality and final AI/dependency checks complete.
 - [ ] Root README and project/README reproduced by another verifier.
-- [ ] Release notes, technical debt and limitations visible.
+- [x] Release notes, technical debt and limitations visible.
 - [ ] Independent human review, integration and release decision recorded.
 - [ ] Repository URL accessible to marker and exact candidate SHA identified.
 - [ ] One source ZIP from submitted commit with root README.md and .gitignore.
@@ -189,69 +196,68 @@ Source ZIP name / SHA correspondence / extracted comparison: [response]
 - [ ] Mixed-group common protection and candidate upload routing checked.
 - [ ] Group reflection, confidential individual peer forms and common team viva routed separately.
 
-Confirmed assessment item/upload route: [response]
-Deadline/timezone: [response]
-Repository access arrangement: [response]
-Mixed-candidate upload arrangement: [response]
-Oral/video recording/accessibility arrangements: [response]
-Remaining administration or release dependency: [response]
+Confirmed assessment item/upload route:Pending confirmation from the Software Technology 1 Canvas assessment instructions. The final submission will include the SmartCare source ZIP, repository URL and exact release SHA through the teaching team's confirmed upload route.
+Deadline/timezone: Pending confirmation from Canvas or the teaching team. The official deadline and timezone must be entered before final submission; no deadline is assumed from the Stage 12 handout.
+Repository access arrangement: The shared repository is https://github.com/DominicRDA-uc/st1-assignment-3. The Assignment 3 GitHub guide requires a public repository accessible to teaching staff. Final access verification is pending.
+Mixed-candidate upload arrangement: The group contains three UG members (Adithi, Dominic and Julianne) and one PG member (Junaid). The integrated repository includes the common functionality and PG rescheduling/assurance extension. Any separate upload routing for mixed cohorts must follow the teaching team's instructions.
+Oral/video recording/accessibility arrangements: The group must confirm the team viva/oral-video arrangements and any accessibility accommodations with the teaching team. These are separate from the Stage 12 release evidence record.
+Remaining administration or release dependency:Outstanding: final code and AI review, independent fresh-copy verification, final group release decision, approved Stage 12 PR and merge, exact final SHA, source ZIP verification, and confirmation of separate group reflection, peer forms and viva submission routes.
 
 
 ## M Formative questions
 
-1. What is a release candidate? [response]
+1. What is a release candidate? A version of the software that is nearly ready for release but still needs final testing, review and approval.
 
-2. What is feature freeze and why is it used? [response]
+2. What is feature freeze and why is it used? Feature freeze means stopping new features so the team can focus on testing, fixing problems and preparing the final release.
 
-3. What is regression testing in a release context? [response]
+3. What is regression testing in a release context? Regression testing checks that existing features still work after changes. For SmartCare, we ran 59 automated tests and all passed.
 
-4. What is a known limitation? [response]
+4. What is a known limitation? Something the system cannot do that is understood and documented. For example, SmartCare does not save patient or appointment data after the program closes.
 
-5. What is technical debt? [response]
+5. What is technical debt? Work that may need improvement later, such as unclear documentation, duplicated code or poor structure. It can make future changes harder.
 
-6. What are release notes? [response]
+6. What are release notes? A summary of the software's features, important fixes, known limitations and changes included in a release.
 
-7. What is software maintenance? [response]
+7. What is software maintenance? Updating and improving software after development, including fixing bugs, improving code quality and adapting to new requirements.
 
-8. What is the purpose of the individual demonstration/viva? [response]
+8. What is the purpose of the individual demonstration/viva? To show that each student understands the project, can explain their contributions and can demonstrate how the software works.
 
-9. What should the final responsible-AI check establish before release? [response]
+9. What should the final responsible-AI check establish before release? It should confirm that AI suggestions were reviewed by humans, the results were tested, private information was protected and no unsupported changes or dependencies were introduced.
 
-10. What is the main course conclusion about AI and the role of the software engineer? [response]
-
+10. What is the main course conclusion about AI and the role of the software engineer? AI can help with coding and problem-solving, but software engineers are still responsible for understanding requirements, checking accuracy, testing, making decisions and ensuring the final software is safe and reliable.
 
 ## N Reflection viva and handover
 
-Strongest evidence SmartCare is ready: [response]
-Weakest area: [response]
-How AI use changed from Stage 1 to Stage 12: [response]
-Start doing — engineering and AI use: [response]
-Stop doing — engineering and AI use: [response]
-Continue doing — engineering and AI use: [response]
-What worked / caused rework / future delivery improvement: [response]
-One paragraph — If AI can write code why do we still need software engineers: [response]
+Strongest evidence SmartCare is ready: The strongest evidence is that all 59 automated tests passed. I also manually tested booking, conflict rejection, cancellation, retained history, appointment filtering, ordering and error recovery. These results support the functionality tested, although final independent release approval is still pending.
+Weakest area: The weakest area is final release verification. Although the tests passed, independent fresh-copy reproducibility, final dependency checks and the complete code quality review still need confirmation.
+How AI use changed from Stage 1 to Stage 12: AI use became more controlled throughout the project. Earlier stages focused on planning and implementing features, while later stages required stronger evidence, human checking and testing. By Stage 12, the focus is on reviewing AI contributions and deciding whether the release is ready.
+Start doing — engineering and AI use: Start reviewing code and requirements earlier, keeping clearer evidence of tests and documenting AI suggestions and human decisions as the work progresses.
+Stop doing — engineering and AI use:Stop leaving documentation and release checks until the final stage. Avoid accepting AI suggestions without understanding whether they meet the requirements.
+Continue doing — engineering and AI use:Continue using GitHub reviews, automated tests, manual demonstrations and human verification of AI suggestions. These help identify problems and keep the project organised.
+What worked / caused rework / future delivery improvement: Automated tests and GitHub collaboration helped the team develop SmartCare across stages. Earlier Stage 8 defects showed the importance of regression testing. Some documentation and verification work was left until late, creating extra work. In future, the team should update evidence and READMEs after each stage rather than at the end.
+One paragraph — If AI can write code why do we still need software engineers: Software engineers are still needed because writing code is only one part of building software. Engineers must understand requirements, make design decisions, test the system, investigate problems and check whether the software is safe and reliable. AI can suggest code and help solve problems, but it can also make mistakes or suggest unnecessary changes. Humans are responsible for checking the results and deciding whether the software is ready to use.
 
 | Preparation item | Own explanation and evidence link |
 |---|---|
-| Problem and stakeholders | [response] |
-| Two requirements and acceptance criteria | [response] |
-| Domain model and architecture | [response] |
-| Design trade-off | [response] |
-| Meaningful test and its limits / 100 percent coverage | [response] |
-| Diagnosed defect and verification | [response] |
-| Shared store and session-state/query responsibilities | [response] |
-| What would break if session-state lookup/query responsibilities changed? | [response] |
-| Why cancellation is domain behaviour / conflict coordination is service behaviour | [response] |
-| FR-07 retained history test | [response] |
-| Actual AI change rejected/modified or honestly accepted with verification | [response] |
-| Unresolved limitation / future production work | [response] |
-| Personal implementation contribution | [response] |
-| Personal test/review/design/integration contribution | [response] |
-| PG agentic change and rescheduling verification | [response] |
-| PG responsible-AI risk/remediation or supported no finding | [response] |
+| Problem and stakeholders | SmartCare helps clinic staff manage patients, practitioners and appointments in one console application. Patients and practitioners are the main people represented, while clinic staff operate the system. Evidence: project/README.md. |
+| Two requirements and acceptance criteria | FR-05 prevents two scheduled bookings for the same practitioner at the exact time. FR-07 retains cancelled appointments in session history. I demonstrated conflict rejection with A006 and retained history with A002. Evidence: project/tests/test_regressions.py; Section D. |
+| Domain model and architecture | domain.py defines entities and appointment rules. data_store.py maintains session records. services.py coordinates operations. queries.py handles selection and sorting. console.py handles user input. Evidence: project/smartcare/; project/README.md. |
+| Design trade-off | The team uses session-only storage instead of persistent storage. This simplifies the course project and matches Revision 2, but records are lost when the application exits. Evidence: project/README.md; FR-10 retirement. |
+| Meaningful test and its limits / 100 percent coverage | test_f8_02_cancelled_appointment_stays_findable checks retained cancellation history. The test passed within the 59-test suite, and manual testing confirmed A002 remained retrievable after cancellation. A passing test does not prove every possible input or 100 percent code coverage. Exact assertions should be explained after inspecting the test body. Evidence: project/tests/test_regressions.py. |
+| Diagnosed defect and verification | Stage 8 F8-01 corrected the practitioner conflict comparison and F8-02 corrected cancelled appointment lookup. Regression tests were added to protect these behaviours. Evidence: Stage 8 records; project/tests/test_regressions.py. |
+| Shared store and session-state/query responsibilities | The shared data store keeps patients, practitioners and appointments in memory. Services use this store, while queries select and order appointments without needing to modify stored records. Evidence: project/smartcare/data_store.py; services.py; queries.py. |
+| What would break if session-state lookup/query responsibilities changed? | If queries changed stored records or used the wrong store, appointments could appear missing, be unexpectedly modified or be listed incorrectly. Evidence: project/tests/test_queries.py; project/tests/test_assurance.py. |
+| Why cancellation is domain behaviour / conflict coordination is service behaviour | Cancellation changes an appointment's own status and follows its permitted state rules. Booking conflict checks require comparing appointments in the shared store, so services coordinate those checks. Evidence: project/smartcare/domain.py; services.py. |
+| FR-07 retained history test | After cancelling A002, I used Find appointment and confirmed it was still available with CANCELLED status. Repeated cancellation was rejected. Evidence: Section D console demonstration; project/tests/test_regressions.py. |
+| Actual AI change rejected/modified or honestly accepted with verification | Stage 11 evidence documents human review of AI findings. The reviewer accepted a limited no-confirmed-vulnerability conclusion and rejected unsupported changes and dependency suggestions. This was not a claim that the project was completely secure. Evidence: stage11_pg/stage11_activities_and_evidence.md; PR #23. |
+| Unresolved limitation / future production work | The system does not include database persistence, production authentication, billing, notifications or clinical decision support. These are outside the course release scope. Evidence: project/README.md; Section G. |
+| Personal implementation contribution | My confirmed Stage 12 contribution is preparing release documentation and carrying out manual verification. No separate production-code implementation contribution is claimed here. Earlier personal implementation contributions should be added only if supported by Git history. |
+| Personal test/review/design/integration contribution | I reviewed and approved Stage 11 PR #23, merged it into main, ran the 59-test suite and manually checked booking, cancellation, conflict rejection, filtering, ordering and error recovery. I also prepared Stage 12 release evidence. Evidence: PR #23; Sections C and D. |
+| PG agentic change and rescheduling verification | Junaid's PG work covers Copilot-assisted appointment rescheduling and assurance. The integrated suite included 20 rescheduling tests, which passed. I did not personally implement the PG feature. Evidence: Stage 10 record; project/tests/test_rescheduling.py. |
+| PG responsible-AI risk/remediation or supported no finding | Stage 11 documented a human-reviewed AI assurance process and a limited no-confirmed-vulnerability finding. The record includes rejection of unsupported suggestions. Final independent PG release verification is still pending. Evidence: stage11_pg/stage11_activities_and_evidence.md; PR #23. |
 
 Optional bounded-change practice only: validation rule, focused test, safe error-message change, explicit-input query or agreed status rule with test. Explain expected impact before editing, make a small change, run the test, and identify evidence to inspect if unsure. No live AI unless explicitly permitted. Preserve the submitted candidate.
 
-Practice question/change and reasoning: [response or not undertaken]
-Separate reflection / peer / common team viva evidence links and routing: [response]
+Practice question/change and reasoning: Not undertaken. No optional bounded-change practice was performed during Stage 12. The completed work focused on regression testing, console demonstration and release documentation. The existing release candidate was preserved without making unverified application changes.
+Separate reflection / peer / common team viva evidence links and routing:The approximately 500-word Group Reflection Report, confidential individual self-and-peer forms and Team Viva are separate final assessment processes. Their submission links, completion status and confirmed upload routes are not yet recorded in this Stage 12 evidence. They must be confirmed through Canvas and the teaching team's instructions.
 No further coding stage. Later corrections use the published assessment process.
