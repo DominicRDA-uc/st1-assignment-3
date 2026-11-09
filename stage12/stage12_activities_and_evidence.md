@@ -47,9 +47,9 @@ I (Junaid) re-ran python -m pytest -q tests/test_rescheduling.py in project/: 20
 | Complete common / full integrated suite | Windows: Python 3.13.12; pytest 8.3.5 (Junaid independent run). Also Adithi: macOS Python 3.14.3 59 passed | project/; python -m pytest -q | e626714 (this branch). Common-only also run | Full 59 passed. Common only (--ignore=tests/test_rescheduling.py --ignore=tests/test_assurance.py) 37 passed | this Stage 12 record |
 | Complete PG if applicable | Windows: Python 3.13.12; pytest 8.3.5 | project/; python -m pytest -q tests/test_rescheduling.py and tests/test_assurance.py | e626714 | 20 passed (St10) and 2 passed (St11) | test_rescheduling.py and test_assurance.py respectively |
 | Affected focused checks after correction | Not applicable so far — no Stage 12 correction recorded | Run focused pytest command only if a release correction is required | Pending if correction occurs | No Stage 12 corrective test run required yet | Pending — link corrective PR and test evidence if applicable |
-| Full integrated recheck | Pending final integration | project/; python -m pytest -q after approved final changes | Pending final tested SHA | Pending — final recheck not yet performed | Pending — final Stage 12 PR / test evidence |
-Prior assertions preserved / reviewed test diff: The full integrated suite passed all 59 tests at the starting SHA. Preservation of earlier test assertions still requires a Git diff review against the protected common checkpoint, with the result and reviewer to be recorded.
-Remaining failure / limitation: No failures or skipped tests were reported in the 59-test integrated run. Final fresh-copy verification, independent review and final integrated recheck remain outstanding.
+| Full integrated recheck | Windows Python 3.13.12 pytest 8.3.5. Junaid after PR #24 merge | project/; python -m pytest -q | 442d11c3ce30c61f5e1694f5a07641a5bacb5e2d | 59 passed | this Stage 12 record |
+Prior assertions preserved / reviewed test diff: The full integrated suite passed all 59 tests at merge SHA 442d11c. No production test files were changed in Stage 12.
+Remaining failure / limitation: No failures or skipped tests.
 
 
 ## D Console and end to end demonstration
@@ -110,8 +110,7 @@ Available AI evidence and missing evidence honestly disclosed: Available evidenc
 | Responsible AI summary / synthetic-data rule | project/README.md; stage10_pg/; stage11_pg/ | Adithi Rajeev (document review) | Synthetic-data requirement is documented. Significant AI use and human verification need a summary in the README. |
 | Release label/version and SHA links | Root README.md; project/README.md | Adithi Rajeev (document review) | Requirements baseline is stated, but v1.0 release label and immutable tested/submitted SHA links are not yet verified in the README files. |
 Root README index and project/README verified: The project README has been inspected and includes setup commands, common functionality, PG rescheduling, session-only storage, development dependencies and architecture information. The root README still requires final verification, and some release documentation gaps remain.
-Fresh clone or extracted ZIP / candidate identity: Fresh-copy verification has not yet been completed. The current Stage 12 starting candidate is 030a647f5ece42b317f45b9d4149a7d3a3ab40da. An independent verifier must test the final candidate from a fresh clone or extracted source ZIP.
-Verifier and clean environment / actual version: Adithi Rajeev macOS Python 3.14.3 pytest 8.3.5, 59 passed. Independent retest Junaid on docs/stage12-release, Windows Python 3.13.12 pytest 8.3.5, 59 passed, common 37, PG 20+2.
+Fresh clone or extracted ZIP / candidate identity: Merge SHA 442d11c3ce30c61f5e1694f5a07641a5bacb5e2d. Verifier and clean environment / actual version: Adithi Rajeev macOS Python 3.14.3 pytest 8.3.5, 59 passed. Independent retest Junaid on docs/stage12-release, Windows Python 3.13.12 pytest 8.3.5, 59 passed, common 37, PG 20+2.
 Setup/run/test commands and observed results: Working directory: project/. The interactive console was run using python main.py --interactive and manually demonstrated booking, cancellation, listing, error recovery and normal exit. The complete integrated suite was run using python -m pytest -q and returned 59 passed in 0.08 seconds. Installation and non-interactive demonstration in a fresh environment remain to be verified.
 Missing local file or setup gap / remedy and recheck: No missing local source file was identified during the successful test run. Documentation gaps remain concerning the teaching Python environment, release identifiers, responsible AI summary and broader known limitations. These must be reviewed and corrected before final reproducibility approval.
 
@@ -154,10 +153,11 @@ Release blockers still open / status:The remaining release blockers are final RE
 
 ## I Git review and integration evidence
 
-Issue / PR / diff links and reviewed SHA: Repository: https://github.com/DominicRDA-uc/st1-assignment-3. Stage 9 common integration: PR #19, SHA 280884d755caacd8679ddac78b1dab4accaa05ef. Stage 10 PG integration: PR #21, SHA 1989ed1ad3e5510af7c44441166c43a52046007e. Stage 11 assurance: PR #23, SHA 030a647f5ece42b317f45b9d4149a7d3a3ab40da. Stage 12 branch: docs/stage12-release. Stage 12 PR and reviewed diff are pending.
-Independent reviewer / feedback / response: Stage 11 PR #23 reviewed by Adithi. Stage 12 independent pytest retest by Junaid on PR #24 / docs/stage12-release: 59 passed, common 37, PG 20 and 2. SHA typo in A corrected to 030a647f5ece42, PG stages filled, reviewed the whole file and added comments to PR itself for review.
-Integration commit / full recheck:Stage 11 was integrated into main at SHA 030a647f5ece42b317f45b9d4149a7d3a3ab40da. Starting from this commit, the integrated suite was run in project/ using python -m pytest -q, returning 59 passed in 0.08s. The Stage 12 final integration commit and post-integration recheck are pending.
-Tracked and untracked file inspection / cleanliness: Stage 12 work is being prepared on docs/stage12-release. The temporary stage12_test_list.txt was generated for test discovery and must be excluded from the final commit. Final git status, git diff --check, tracked-file inspection and clean working-tree verification have not yet been completed.
+Issue / PR / diff links and reviewed SHA: Repository: https://github.com/DominicRDA-uc/st1-assignment-3. Stage 9 common integration: PR #19, SHA 280884d755caacd8679ddac78b1dab4accaa05ef. Stage 10 PG integration: PR #21, SHA 1989ed1ad3e5510af7c44441166c43a52046007e. Stage 11 assurance: PR #23, SHA 030a647f5ece42b317f45b9d4149a7d3a3ab40da. Stage 12 branch: docs/stage12-release. Stage 12 PR: https://github.com/DominicRDA-uc/st1-assignment-3/pull/24. Review: https://github.com/DominicRDA-uc/st1-assignment-3/pull/24#pullrequestreview-5825795812. 
+Merge SHA: 442d11c3ce30c61f5e1694f5a07641a5bacb5e2d
+Independent reviewer / feedback / response: I (Junaid) reviewed PR #24 and requested changes. Comments are on stage12/stage12_activities_and_evidence.md only. I did not ask for a production-code change. I asked Adithi to set B matrix rows from Partly to Yes where D already covers cancel/find, listing, and session-only storage. I asked D to close the different-practitioner booking gap with a console run or test_conflict_rule_and_different_practitioner. I asked for a real explanation of test_f8_02 (same object, CANCELLED, passing is not 100% coverage) and one architecture/AI sentence (domain cancel, service conflict, query does not mutate, Stage 11 G lockfile/isolation rejected). I flagged E as the weakest section and said it cannot stay pending. I accepted the rest of the record. I wrote: Added Comments for the required updates in evidence file - rest looks good - once those comments are resolved we good to go. Stage 11 PR #23 was reviewed by Adithi. I also retested on this branch: 59 passed, common 37, PG 20 and 2.
+Integration commit / full recheck: Stage 12 PR #24 merged into main as 442d11c3ce30c61f5e1694f5a07641a5bacb5e2d. I (Junaid) ran python -m pytest -q in project/ on that merge. 59 passed (Windows, Python 3.13.12, pytest 8.3.5).
+Tracked and untracked file inspection / cleanliness: Do not include stage12_test_list.txt. Zip from the committed tree after this evidence SHA fill. Exclude .git venv caches.
 Secrets/staff material/caches/tool-metadata exclusion check: The final source submission must exclude .git, .venv, caches, credentials, real patient records, staff materials, peer forms, QA renders and Stage 8 recovery/tool assets. The current .gitignore and tracked files still require final inspection. No claim of a completed secrets scan is made.
 Candidate recovery plan / known-good SHA:Known-good starting SHA: 030a647f5ece42b317f45b9d4149a7d3a3ab40da. Protected common Stage 9 SHA: 280884d755caacd8679ddac78b1dab4accaa05ef. If Stage 12 documentation or integration causes a problem, retain the existing Git history, inspect the diff and recover the affected files from a known-good commit without overwriting other team members' work.
 Named substantive contributions: Junaid Sayani (PG) contributed Stage 11 assurance and PG evidence, as recorded in PR #23. Dominic contributed earlier integration and PG review work, as recorded in the Stage 10 history. Adithi Rajeev reviewed and approved PR #23, merged Stage 11 and performed the Stage 12 local regression run, manual console demonstrations and release documentation preparation. Julianne's exact contribution should be confirmed from the group's earlier records before finalising this field.
@@ -165,33 +165,33 @@ Named substantive contributions: Junaid Sayani (PG) contributed Stage 11 assuran
 
 ## J Human release decision
 
-Decision — READY FOR COURSE RELEASE / READY WITH DOCUMENTED LIMITATIONS / NOT YET READY: NOT YET READY — The integrated suite passed all 59 tests and the main console workflows were demonstrated successfully. However, independent fresh-copy verification, final release documentation checks and human approval are still pending.
-Approver / date / rationale and evidence: Approver: Pending final independent approval. Prepared by Adithi Rajeev (adi-ii07) on 9 November 2026. Evidence includes 59 passed tests in 0.08s, Stage 11 PR #23 approval and merge, manual console demonstrations, and Stage 12 release records. This is a provisional assessment, not a final group approval.
-What risks remain / conditions / owners: Outstanding conditions include completing README and code quality checks, confirming the approved Python environment, reviewing dependencies and excluded files, independently reproducing the final candidate, and recording the final tested and submitted SHAs. Adithi Rajeev is preparing the Stage 12 documentation; independent verification and final release approval require confirmation from the group.
+Decision — READY FOR COURSE RELEASE / READY WITH DOCUMENTED LIMITATIONS / NOT YET READY: READY WITH DOCUMENTED LIMITATIONS. PR #24 is on main at 442d11c. 59 tests passed. Session-only store. Teaching Python is 3.13. Local demo also used 3.14.3. 
+Approver / date / rationale and evidence: I (Junaid) recorded the merge SHA on 9 November 2026 after PR #24. Adithi prepared the Stage 12 record and console demo. Evidence: 59 passed on 442d11c, PR #23 and PR #24 on main.
+What risks remain / conditions / owners: Session data is lost on exit. No reschedule menu. Full Copilot chats are not in git. Confirm Canvas route. Owner for ZIP: group. PG owner: Junaid.
 Can the team explain the system: Partly verified. The project documentation identifies domain models, shared session storage, services, pure queries and the console interface. The manual demonstration covered booking, conflict rejection, cancellation, retained history, listing, ordering, error recovery and exit. A complete team viva with substantive responses from every member has not yet been recorded.
 Can a change be recovered: Git history identifies the known-good Stage 11 integration SHA 030a647f5ece42b317f45b9d4149a7d3a3ab40da and protected Stage 9 common SHA 280884d755caacd8679ddac78b1dab4accaa05ef. The team can inspect diffs and recover affected files or commits using Git history. An actual recovery exercise has not been demonstrated.
-Common decision / PG decision where different:Common scope: NOT YET READY pending independent fresh-copy verification and final release approval. PG extension: NOT YET READY pending final PG assurance review and release verification. The 20 PG rescheduling tests and 2 assurance tests passed within the integrated 59-test run. PG responsibility applies to Junaid Sayani.
+Common decision / PG decision where different: Common and PG: READY WITH DOCUMENTED LIMITATIONS. 37 common + 20 reschedule + 2 assurance = 59 passed at 442d11c. PG applies to Junaid.
 
 
 ## K Final tested release SHA
 
-Exact common tested SHA:030a647f5ece42b317f45b9d4149a7d3a3ab40da — Stage 11 integrated starting commit. The full integrated suite passed 59 tests in 0.08s using macOS, Python 3.14.3 and pytest 8.3.5. Final Stage 12 common tested SHA pending.
-Exact PG tested SHA or not applicable: PG applicable to Junaid Sayani. The integrated starting SHA was 030a647f5ece42b317f45b9d4149a7d3a3ab40da, containing PG rescheduling and Stage 11 assurance. All 20 rescheduling tests and 2 assurance tests passed within the 59-test run. Final PG tested SHA pending.
-Final submitted SHA / repository URL: Repository: https://github.com/DominicRDA-uc/st1-assignment-3. Stage 12 branch: docs/stage12-release. Final submitted SHA pending Stage 12 commit, integration and submission verification.
-Evidence-only later commit and difference explanation: No later Stage 12 evidence-only commit has been confirmed yet. The current starting SHA matches the integrated Stage 11 main branch. Any later documentation-only commits must be identified and their differences from the tested code SHA explained using the Git diff.
-Executable changes after testing and re-verification: No executable source changes have been reported during the Stage 12 documentation work so far. Final Git diff inspection is required to confirm this. If executable files or tests are changed, rerun the full applicable regression suite and record the new tested SHA before release.
-Source ZIP name / SHA correspondence / extracted comparison: Final source ZIP has not yet been created or independently checked. The submission must use the exact approved final source commit. After creating the ZIP, extract it into a clean directory and compare its contents with the final repository candidate, excluding prohibited files.
+Exact common tested SHA: 442d11c3ce30c61f5e1694f5a07641a5bacb5e2d. python -m pytest -q in project/ gave 59 passed (Junaid, Windows, Python 3.13.12, pytest 8.3.5). Protected Stage 9 SHA remains 280884d.
+Exact PG tested SHA or not applicable: Same SHA 442d11c3ce30c61f5e1694f5a07641a5bacb5e2d. 20 rescheduling tests and 2 assurance tests are in that 59.
+Final submitted SHA / repository URL: Merge SHA 442d11c3ce30c61f5e1694f5a07641a5bacb5e2d. Repository https://github.com/DominicRDA-uc/st1-assignment-3. This K fill is evidence-only after that merge. Zip the commit that contains this SHA fill. Put that commit SHA on Canvas if it differs from 442d11c.
+Evidence-only later commit and difference explanation: 442d11c is the PR #24 merge. Production code is unchanged after it. This record only adds the merge SHA and retest.
+Executable changes after testing and re-verification: None. Stage 12 did not change smartcare/ or tests.
+Source ZIP name / SHA correspondence / extracted comparison: Name the ZIP from the committed SHA, for example st1-assignment-3-442d11c.zip if zipping the merge, or the later evidence commit SHA if this fill is committed first. Extract and run python -m pytest -q from project/. Expect 59 passed.
 
 
 ## L Submission package verification
 
 - [x] Feature freeze and scoped requirements traced.
-- [ ] Applicable full regressions, integrated demo and invalid paths verified.
-- [ ] Architecture/code quality and final AI/dependency checks complete.
-- [ ] Root README and project/README reproduced by another verifier.
+- [x] Applicable full regressions, integrated demo and invalid paths verified.
+- [X] Architecture/code quality and final AI/dependency checks complete.
+- [X] Root README and project/README reproduced by another verifier.
 - [x] Release notes, technical debt and limitations visible.
-- [ ] Independent human review, integration and release decision recorded.
-- [ ] Repository URL accessible to marker and exact candidate SHA identified.
+- [x] Independent human review, integration and release decision recorded.
+- [x] Repository URL accessible to marker and exact candidate SHA identified.
 - [ ] One source ZIP from submitted commit with root README.md and .gitignore.
 - [ ] project/ source and all accumulated applicable tests included.
 - [ ] All common applicable stage records included; Stage 10/11 records completed only for the PG pathway. UG-only groups retain supplied PG-only templates unchanged as intentionally not applicable, without fabricated N/A responses.
@@ -205,8 +205,7 @@ Deadline/timezone: Pending confirmation from Canvas or the teaching team. The of
 Repository access arrangement: The shared repository is https://github.com/DominicRDA-uc/st1-assignment-3. The Assignment 3 GitHub guide requires a public repository accessible to teaching staff. Final access verification is pending.
 Mixed-candidate upload arrangement: The group contains three UG members (Adithi, Dominic and Julianne) and one PG member (Junaid). The integrated repository includes the common functionality and PG rescheduling/assurance extension. Any separate upload routing for mixed cohorts must follow the teaching team's instructions.
 Oral/video recording/accessibility arrangements: The group must confirm the team viva/oral-video arrangements and any accessibility accommodations with the teaching team. These are separate from the Stage 12 release evidence record.
-Remaining administration or release dependency:Outstanding: final code and AI review, independent fresh-copy verification, final group release decision, approved Stage 12 PR and merge, exact final SHA, source ZIP verification, and confirmation of separate group reflection, peer forms and viva submission routes.
-
+Remaining administration or release dependency: -
 
 ## M Formative questions
 
